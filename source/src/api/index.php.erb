@@ -1,0 +1,61 @@
+---
+title: MWA Academic Fun Fest - API
+layout: "layout-api"
+---
+<?php
+    date_default_timezone_set("Asia/Bangkok");
+
+    require_once '../../packages/autoload.php';
+
+    /* Connect Database Manager Partial */
+    <%= partial "/ConnectDatabase/_connectDB2_Localhost" %>
+    <%= partial "/ConnectDatabase/_connectMySQL_Localhost" %>
+
+
+    /* Slim framework */
+    $app = new \Slim\Slim();
+
+    // $corsOptions = array(
+    //     "origin" => "*",
+    //     "exposeHeaders" => array("X-My-Custom-Header", "X-Another-Custom-Header"),
+    //     "maxAge" => 1728000,
+    //     "allowCredentials" => True,
+    //     "allowMethods" => array("POST, GET"),
+    //     "allowHeaders" => array("X-PINGOTHER")
+    // );
+
+
+    /* CorsSlim is added */
+    // $app->add(new \CorsSlim\CorsSlim($corsOptions));
+
+
+
+    /* Test Manager */
+    $app->get('/testManager/getMsg/:name',function($name) use ($app) { getMsg($app, $name); });
+
+    /* Login manager */
+    $app->post('/loginManager/checkUserPassword/',function() use ($app, $pdo, $db) { checkUserPassword($app, $pdo, $db); });
+    $app->post('/loginManager/logout/',function() use ($app, $pdo, $db) { logout($app, $pdo, $db); });
+
+    /* WLMA manager */
+    $app->post('/wlmaManager/checkUserPasswordFromWLMA/',function() use ($app, $pdo, $conn_db2) { checkUserPasswordFromWLMA($app, $pdo, $conn_db2); });
+
+    // $corsOptions = array("origin" => "*");
+    // $app->post('/loginManager/logout/',\CorsSlim\CorsSlim::routeMiddleware($corsOptions) ,function() use ($app, $pdo, $db) { 
+    //     logout($app, $pdo, $db); 
+    // });
+	
+
+	$app->run();
+
+    /* Test Manager Partial */
+    <%= partial "/TestManager/_getMsg" %>
+
+    /* Login Manager Partial */
+    <%= partial "/LoginManager/_checkUserPassword" %>
+    <%= partial "/LoginManager/_logout" %>
+
+    /* WLMA Manager Partial */
+    <%= partial "/WlmaManager/_checkUserPasswordFromWLMA" %>
+    
+?>

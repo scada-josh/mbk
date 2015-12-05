@@ -1,0 +1,32 @@
+indexModule.controller("AppCtrl1", function($scope, myPost, myGet){
+	var app = this;
+
+	app.isHidden = false;
+	app.toggle = function() {
+		app.isHidden = !app.isHidden;
+	}
+
+	$scope.visible = true;
+
+	$scope.firstname = "myFirstName";
+	$scope.lastname = "myLastName";
+
+	$scope.printName = function() {
+		return $scope.firstname + ' ' + $scope.lastname;
+	}
+
+
+	$scope.event = [];
+
+
+
+	myPost.save(function(data) {
+		$scope.posts = data;
+		console.log(data);
+	});
+
+	myGet.get({ name: 'josh' }, function(data) {
+		console.log(data.msg);
+	});
+
+});
