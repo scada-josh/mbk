@@ -173,7 +173,7 @@ session_start(); //start session.
                                             <li class="">
                         <a href="#" class="dropdown-toggle">
                             <i class="fa fa-desktop"></i>
-                            <span>Events Management</span>
+                            <span>Events Manager</span>
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
