@@ -200,25 +200,7 @@ session_start(); //start session.
                     <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12 tile-active">
-                                <a href="#" class="tile tile-red" data-stop="5000">
-                                    <div class="img img-center">
-                                        <i class="fa fa-camera"></i>
-                                    </div>
-                                    <p class="title text-center">Conference</p>
-                                </a>
-
-                                <div class="tile tile-green" data-stop="2000">
-                                    <p class="title">Conference</p>
-                                    <p>ประชุมสัมมนา</p>
-                                    <div class="img img-bottom">
-                                        <i class="fa fa-camera"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 tile-active">
-                                <a href="http://google.co.th" class="tile tile-img" style="background-image: url(../../../images/images-flaty_theme/img/mbk/menuTile/menuTile-Event.png);">
+                                <a href="./Events/" class="tile tile-img" style="background-image: url(../../../images/images-flaty_theme/img/mbk/menuTile/menuTile-Event.png);">
                                     <p class="title">Events</p>
                                 </a>
 
@@ -232,16 +214,47 @@ session_start(); //start session.
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12 tile-active">
+                                <a href="#" class="tile tile-red" data-stop="5000">
+                                    <div class="img img-center">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                    <p class="title text-center">Conference</p>
+                                </a>
+
+                                <div class="tile tile-green" data-stop="2000">
+                                    <p class="title">Conference</p>
+                                    <p>ประชุมสัมมนา</p>
+                                    <div class="img img-bottom">
+                                        <i class="fa fa-gears"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-6 tile-active">
                                 <a href="#" class="tile tile-magenta" data-stop="5000">
                                     <div class="img img-center">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fa fa-dashboard"></i>
                                     </div>
                                     <p class="title text-center">Training</p>
                                 </a>
                                 <div class="tile tile-pink" data-stop="2000">
                                     <p class="title">Training</p>
                                     <p>บันทึกการเข้าร่วมอบรม</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 tile-active">
+                                <a href="#" class="tile tile-magenta" data-stop="5000">
+                                    <div class="img img-center">
+                                        <i class="fa fa-qrcode"></i>
+                                    </div>
+                                    <p class="title text-center">QRCode Generator</p>
+                                </a>
+                                <div class="tile tile-pink" data-stop="2000">
+                                    <p class="title">QRCode Generator</p>
+                                    <p>ระบบสร้าง QRCode จากข้อมูลพนักงาน</p>
                                 </div>
                             </div>
                         </div>

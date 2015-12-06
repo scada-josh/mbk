@@ -1,0 +1,15 @@
+                    <li class="<%= current_page.data.menuEventManagement_IsActive %>">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-desktop"></i>
+                            <span>Events Management</span>
+                            <b class="arrow fa fa-angle-right"></b>
+                        </a>
+
+                        <!-- BEGIN Submenu -->
+                        <ul class="submenu">
+                            <li class="<%= current_page.data.menuEventManagement_Events_IsActive %>">
+                                <a href="<%= current_page.data.menuEventManagement_Events_href %>">Events</a>
+                            </li>
+                        </ul>
+                        <!-- END Submenu -->
+                    </li>

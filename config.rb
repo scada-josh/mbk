@@ -62,6 +62,9 @@ set :partials_desktop_Admin_blank_dir, 'src/desktop/Admin/blank'
 set :partials_desktop_Home_index_dir, 'src/desktop/Home'
 
 set :partials_desktop_home, 'src/desktop/Home'
+set :partials_desktop_home_events_common, 'src/desktop/Home/Events/Events-common'
+set :partials_desktop_home_events, 'src/desktop/Home/Events'
+set :partials_desktop_home_events_management, 'src/desktop/Home/Events/Management'
 
 set :partials_desktop_home_rtu_information, 'src/desktop/Home/RTU/Information'
 

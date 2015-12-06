@@ -1,0 +1,45 @@
+---
+title: "Events Management"
+layout: "layout-mbk-home-events-management-index"
+
+baseURL: "/mbk/build/src/desktop/Home/Events/Management/"
+homeURL: "../../"
+loginURL: "../../../../../Login/index.php"
+imageURL: "../../../../../images"
+
+pageTitle: " Events Management"
+pageDescription: "You can start your customization from this one!"
+
+menuDashboard_IsActive: ""
+menuDashboard_href: "../"
+
+menuEventManagement_IsActive: "active"
+menuEventManagement_Events_IsActive: "active"
+menuEventManagement_Events_href: "./"
+---
+
+
+        <!-- Admin - Navbar  -->
+        <%= partial partials_desktop_Common_dir + "/_common-navbar" %>
+
+
+        <!-- BEGIN Container -->
+        <div class="container sidebar-blue" id="main-container">
+			
+			<!-- Home - Events - Managements - Container - Sidebar  -->
+            <%= partial partials_desktop_home_events_common + "/_home-events-sidebar.erb" %>
+
+            <!-- Home - Events - Management - Container - Content -->
+            <%= partial partials_desktop_home_events_management + "/_home-events-management-container-mainContent" %>
+
+        </div>
+        <!-- END Container -->
+
+
+
+
+
+
+
+
+
