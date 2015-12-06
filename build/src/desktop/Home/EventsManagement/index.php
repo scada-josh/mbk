@@ -5,7 +5,7 @@ session_start(); //start session.
 <!DOCTYPE html>
 <html>
     <head>
-        <base href="/mbk/build/src/desktop/Home/Events/">
+        <base href="/mbk/build/src/desktop/Home/EventsManagement/">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Events</title>
@@ -180,7 +180,7 @@ session_start(); //start session.
                         <!-- BEGIN Submenu -->
                         <ul class="submenu">
                             <li class="">
-                                <a href="./Management/">Events</a>
+                                <a href="./Events/">Events</a>
                             </li>
                         </ul>
                         <!-- END Submenu -->
@@ -198,12 +198,12 @@ session_start(); //start session.
             </div>
             <!-- END Sidebar -->
 
-            <!-- Home - Events - Container - Content -->
+            <!-- Home - EventsManagement - Container - Content -->
                 <!-- BEGIN Content -->
     <div id="main-content" >
 
 
-        <!-- Home - Events - Container - MainContent - PageTitle  -->
+        <!-- Home - EventsManagement - Container - MainContent - PageTitle  -->
                         <!-- BEGIN Page Title -->
                 <div class="page-title">
                     <div>
@@ -214,7 +214,7 @@ session_start(); //start session.
                 <!-- END Page Title -->
 
 
-        <!-- Home - Events - Container - MainContent - breadCrumbs  -->
+        <!-- Home - EventsManagement - Container - MainContent - breadCrumbs  -->
                         <!-- BEGIN Breadcrumb -->
                 <div>
                     <ul class="breadcrumb">
@@ -223,7 +223,11 @@ session_start(); //start session.
                             <a href="../">Home</a>
                             <span class="divider"><i class="fa fa-angle-right"></i></span>
                         </li>
-                        <li class="active">Events Management</li>
+                        <li class="active">
+                            Events Management
+                            <span class="divider"><i class="fa fa-angle-right"></i></span>
+                        </li>
+                        <li class="active">Dashboard</li>
                     </ul>
                 </div>
                 <!-- END Breadcrumb -->
@@ -235,7 +239,7 @@ session_start(); //start session.
         <div class="row" >
             <div class="col-md-12" >
                 
-                <!-- Home - Events - Container - Blank - MainContent - sampleBox  -->
+                <!-- Home - EventsManagement - Container - Blank - MainContent - sampleBox  -->
                                         <div class="box" >
                             <div class="box-title">
                                 <h3><i class="fa fa-file"></i> Sample Box</h3>

@@ -200,7 +200,7 @@ session_start(); //start session.
                     <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12 tile-active">
-                                <a href="./Events/" class="tile tile-img" style="background-image: url(../../../images/images-flaty_theme/img/mbk/menuTile/menuTile-Event.png);">
+                                <a href="./EventsManagement/" class="tile tile-img" style="background-image: url(../../../images/images-flaty_theme/img/mbk/menuTile/menuTile-Event.png);">
                                     <p class="title">Events</p>
                                 </a>
 
@@ -236,13 +236,14 @@ session_start(); //start session.
                             <div class="col-md-6 tile-active">
                                 <a href="#" class="tile tile-magenta" data-stop="5000">
                                     <div class="img img-center">
-                                        <i class="fa fa-dashboard"></i>
+                                        <i class="fa fa-user"></i>
                                     </div>
-                                    <p class="title text-center">Training</p>
+                                    <p class="title text-center">Employees Management</p>
                                 </a>
                                 <div class="tile tile-pink" data-stop="2000">
-                                    <p class="title">Training</p>
-                                    <p>บันทึกการเข้าร่วมอบรม</p>
+                                    <p class="title">Employees Management</p>
+                                    <hr/>
+                                    <p>ส่วนจัดการข้อมูลพนักงาน</p>
                                 </div>
                             </div>
                             <div class="col-md-6 tile-active">
@@ -254,7 +255,8 @@ session_start(); //start session.
                                 </a>
                                 <div class="tile tile-pink" data-stop="2000">
                                     <p class="title">QRCode Generator</p>
-                                    <p>ระบบสร้าง QRCode จากข้อมูลพนักงาน</p>
+                                    <hr/>
+                                    <p>ระบบสร้าง QRCode</p>
                                 </div>
                             </div>
                         </div>

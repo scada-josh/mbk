@@ -5,7 +5,7 @@ session_start(); //start session.
 <!DOCTYPE html>
 <html>
     <head>
-        <base href="/mbk/build/src/desktop/Home/Events/Management/">
+        <base href="/mbk/build/src/desktop/Home/EventsManagement/Events/">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Events Management</title>
@@ -142,7 +142,7 @@ session_start(); //start session.
         <!-- BEGIN Container -->
         <div class="container sidebar-blue" id="main-container">
 			
-			<!-- Home - Events - Managements - Container - Sidebar  -->
+			<!-- Home - EventsManagement - Events - Container - Sidebar  -->
                         <!-- BEGIN Sidebar -->
             <!-- <div id="sidebar" class="navbar-collapse collapse"> -->
             <div id="sidebar" class="navbar-collapse collapse sidebar-fixed">
@@ -198,12 +198,12 @@ session_start(); //start session.
             </div>
             <!-- END Sidebar -->
 
-            <!-- Home - Events - Management - Container - Content -->
+            <!-- Home - EventsManagement - Events - Container - Content -->
                 <!-- BEGIN Content -->
     <div id="main-content" >
 
 
-        <!-- Home - Events - Management - Container - MainContent - PageTitle  -->
+        <!-- Home - EventsManagement - Events - Container - MainContent - PageTitle  -->
                         <!-- BEGIN Page Title -->
                 <div class="page-title">
                     <div>
@@ -214,7 +214,7 @@ session_start(); //start session.
                 <!-- END Page Title -->
 
 
-        <!-- Home - Events - Management - Container - MainContent - breadCrumbs  -->
+        <!-- Home - EventsManagement - Events - Container - MainContent - breadCrumbs  -->
                         <!-- BEGIN Breadcrumb -->
                 <div>
                     <ul class="breadcrumb">
@@ -226,7 +226,7 @@ session_start(); //start session.
                         <li class="active">Events Management
                             <span class="divider"><i class="fa fa-angle-right"></i></span>
                         </li>
-                        <li class="active">Management</li>
+                        <li class="active">Events</li>
 
 
                     </ul>
@@ -240,7 +240,7 @@ session_start(); //start session.
         <div class="row" >
             <div class="col-md-12" >
                 
-                <!-- Home - Events - Management - Container - Blank - MainContent - sampleBox  -->
+                <!-- Home - EventsManagement - Events - Container - Blank - MainContent - sampleBox  -->
                                         <div class="box" >
                             <div class="box-title">
                                 <h3><i class="fa fa-file"></i> Sample Box</h3>

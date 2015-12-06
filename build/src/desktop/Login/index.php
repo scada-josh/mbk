@@ -38,27 +38,24 @@ session_start(); //start session.
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#why">Why Us?</a>
+                        <a href="#Home">Home</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#who">API</a>
+                        <a href="#HowItWorks">How it works?</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#clients">Who are we?</a>
+                        <a href="#FeaturesAndBenefits">Features & Benefits</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact</a>
+                        <a href="#Contact">Contact</a>
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
 
- 
 
-
-
-    <section class="login-section">
+    <section id="Home" class="login-section">
         <div class="login-body">
             <div class="container">
                 <div class="row login-page">
@@ -185,8 +182,8 @@ session_start(); //start session.
 
 
     
-
-    <section id="why" class="container content-section">
+    <!-- Login - Section - How It Works  -->
+        <section id="HowItWorks" class="container content-section">
     <h2 class="text-center"> Why Choose Us?</h2>
     <p class="text-center">Here are just a few reason to choose <strong>Digital Agency</strong> for all of my digital marketing needs.</p>
     <br/>
@@ -267,6 +264,173 @@ session_start(); //start session.
 
     </div>
 </section>
+
+    <!-- Login - Section - How It Works  -->
+        <section id="FeaturesAndBenefits" class="container content-section">
+    <h2 class="text-center"> Why Choose Us?</h2>
+    <p class="text-center">Here are just a few reason to choose <strong>Digital Agency</strong> for all of my digital marketing needs.</p>
+    <br/>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-briefcase fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Professional</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-money fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Low Cost</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-dashboard fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Faster</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-gear fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Resources & Tools </h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-users fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Large Community</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Online Course</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- Login - Section - Contact  -->
+        <section id="Contact" class="container content-section">
+    <h2 class="text-center"> Why Choose Us?</h2>
+    <p class="text-center">Here are just a few reason to choose <strong>Digital Agency</strong> for all of my digital marketing needs.</p>
+    <br/>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-briefcase fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Professional</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-money fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Low Cost</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-dashboard fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Faster</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-gear fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Resources & Tools </h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-users fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Large Community</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="block block-icon-left">
+                <div class="icon">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="icon-content">
+                    <h3>Online Course</h3>
+                    <p>Lorem ipsum sit amet, consectatur apdipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
     
 
