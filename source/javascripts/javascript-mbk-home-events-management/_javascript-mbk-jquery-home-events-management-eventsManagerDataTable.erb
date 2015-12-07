@@ -1,0 +1,74 @@
+//------------------------ EventsManager Data Table -----------------------//
+if (jQuery().dataTable) {
+
+
+    var EventsManagerDataTable = $('#EventsManagerDataTable').DataTable( {
+        // "processing": true,
+        // "serverSide": true,
+        //scrollY: '40vh',
+        //scrollCollapse: true,
+        // กำหนดการแสดงผล Drop down เมนู
+        "aLengthMenu": [
+                [5, 10, 15, 25, 50, 100, -1],
+                [5, 10, 15, 25, 50, 100, "All"]
+            ],
+        "iDisplayLength": 5,
+        // กำหนดการแสดงผลบน label
+        "oLanguage": {
+                "sLengthMenu": "_MENU_ Records per page",
+                "sInfo": "_START_ - _END_ of _TOTAL_",
+                "sInfoEmpty": "0 - 0 of 0",
+                "oPaginate": {
+                    "sPrevious": "Prev",
+                    "sNext": "Next"
+                }
+        },
+            // "aoColumnDefs": [{
+            //     'bSortable': false,
+            //     'aTargets': [0]
+            // }]
+        // "aoColumns" : [
+        //     { 
+        //         'sWidth': 'null'
+        //     }, // 1st column width 
+        //     { "sWidth": "null" }, // 2nd column width 
+        //     { "sWidth": "null" }, // 3rd column width
+        //     { "sWidth": "null" } // 4th column width 
+        // ],  
+        // กำหนดคอลัมภ์ให้สามารถ sort ได้หรือไม่
+        "aoColumnDefs": [
+                // {
+                //     'sWidth': '14px', 
+                //     'orderable' : false,
+                //     'bAutoWidth': false, 
+                //     'bSortable' : false, 
+                //     'aTargets' : [0]
+                // },
+                {
+                    'bSortable': true,
+                    "bAutoWidth": true,
+                    'aTargets': [0]
+                },
+                // {
+                //     'sWidth': '80px', 
+                //     'bSortable': true,
+                //      "bAutoWidth": false,
+                //     'aTargets': [2]
+                // },
+                {
+                    'sWidth': '130px', 
+                    'bSortable': false,
+                    "bAutoWidth": false,
+                    'aTargets': [1]
+                }
+        ],
+        "order" : [] //disable default sorting, eg sorting on 1st column
+        
+    });
+
+
+
+
+}
+
+
