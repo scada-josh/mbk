@@ -3,10 +3,25 @@ if (jQuery().dataTable) {
 
 
     var EventsManagerDataTable = $('#EventsManagerDataTable').DataTable( {
-        // "processing": true,
+         "processing": true,
         // "serverSide": true,
         //scrollY: '40vh',
         //scrollCollapse: true,
+        "ajax": {
+            "url": "../../../../api/eventManager/listEvent/",
+            "type": "POST",
+            //"dataType": "json",
+            // "data"   : function( d ) {
+            //   d.agendaID = "agenda-0001-0001";
+            // },
+            "dataSrc": "rows",
+            // "success": function(data) {
+            //     console.log(data);
+            // },
+            // "error": function(jqXHR, textStatus, errorThrown){
+            //     alert('init error: ' + textStatus);
+            // }
+        },
         // กำหนดการแสดงผล Drop down เมนู
         "aLengthMenu": [
                 [5, 10, 15, 25, 50, 100, -1],
@@ -60,6 +75,55 @@ if (jQuery().dataTable) {
                     'bSortable': false,
                     "bAutoWidth": false,
                     'aTargets': [1]
+                },{
+                    // The `data` parameter refers to the data for the cell (defined by the
+                    // `data` option, which defaults to the column being worked with, in
+                    // this case `data: 0`.
+                    "render": function ( data, type, row ) {
+                        //console.log(data);
+                        //console.log(type);
+                        //console.log(row);
+                        //console.log(row.user_name);
+                     
+
+                        var tmpListEvents = "";
+                        tmpListEvents = '<div class="mail-msg-header">';
+                        tmpListEvents += '<div class="msg-sender-recver">';
+                        tmpListEvents += '<strong style="color: #428bca">' + row.event_name_th + '</strong><br/>';
+                        tmpListEvents += '<i>' + row.event_location + '</i><br/>';
+                        tmpListEvents += '<i class="fa fa-clock-o blue"> &nbsp;</i><i>' + row.event_begin_date + '</i> &nbsp;';
+                        tmpListEvents += '<i class="fa fa-user blue"> &nbsp;</i><i>7/20</i>';
+                        tmpListEvents += '</div>';
+                        tmpListEvents += '</div>';
+
+                        return tmpListEvents;
+                    },
+                    "targets": 0
+                },{
+                    // The `data` parameter refers to the data for the cell (defined by the
+                    // `data` option, which defaults to the column being worked with, in
+                    // this case `data: 0`.
+                    "render": function ( data, type, row ) {
+                        //console.log(data);
+                        //console.log(type);
+                        //console.log(row);
+                        //console.log(row.user_name);
+
+                        var tmpListEventControls = "";
+
+                        //tmpListEventControls = '<td class="text-center " style="vertical-align:middle">';
+                        tmpListEventControls += '<div class="btn-group">';
+                        tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="#" data-original-title="View"><i class="fa fa-search-plus"></i></a>';
+                        tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="#" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+                        tmpListEventControls += '<a class="btn btn-sm btn-danger show-tooltip" title="" href="#" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>';
+                        tmpListEventControls += '</div>';
+                        //tmpListEventControls += '</td>';
+
+                        return tmpListEventControls;
+                    },
+                    "targets": 1
+                },{ 
+                    "sClass": "EventsManagerDataTable_Controls", "aTargets": [1] 
                 }
         ],
         "order" : [] //disable default sorting, eg sorting on 1st column

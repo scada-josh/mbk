@@ -1,0 +1,101 @@
+    /**
+     *
+     * @apiName ListEvent
+     * @apiGroup Event Manager
+     * @apiVersion 0.1.0
+     *
+     * @api {post} /eventManager/listEvent/ List Event
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ
+     *
+     *
+     * @apiSampleRequest /eventManager/listEvent/
+     *
+     * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
+     *
+     * @apiSuccessExample Example data on success:
+     * {
+     *   "msg": "Hello, anusorn"
+     * }
+     *
+     * @apiError UserNotFound The <code>id</code> of the User was not found.
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "error": "UserNotFound"
+     *     }
+     *
+     */
+     function listEvent($app, $pdo, $db) {
+
+        /* ************************* */
+        /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
+        /* ************************* */
+        $headers = $app->request->headers;
+        $ContetnType = $app->request->headers->get('Content-Type');
+
+        /**
+        * apidoc @apiSampleRequest, iOS RESTKit use content-type is "application/json"
+        * Web Form, Advance REST Client App use content-type is "application/x-www-form-urlencoded"
+        */
+        if ($ContetnType == "application/json") {
+
+            $request = $app->request();
+            $result = json_decode($request->getBody());
+
+            /* receive request */
+            // $postUserName = $result->userName;
+            // $postPassWord = $result->passWord;
+
+
+        } else if ($ContetnType == "application/x-www-form-urlencoded"){
+
+            //$userID = $app->request()->params('userID_param');
+            //$userID = $app->request()->post('userID_param');
+        }
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
+        /* ************************* */
+        $reports = array();
+
+        $results = $db->events_tb->order("event_id ASC");
+
+        foreach ($results as $result) {
+
+            $reports[] = array(
+                "id" => $result["id"],
+                "event_id" => $result["event_id"],
+                "event_name_th" => $result["event_name_th"],
+                "event_name_eng" => $result["event_name_eng"],
+                "event_location" => $result["event_location"],
+                "event_begin_date" => $result["event_begin_date"],
+                "event_end_date" => $result["event_end_date"],
+                "event_active" => $result["event_active"],
+                "created_datetime" => $result["created_datetime"],
+                "modified_datetime" => $result["modified_datetime"]
+                );
+        }
+
+        $rowCount = count($results);
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการส่งค่ากลับ */
+        /* ************************* */
+        $resultText = "success";
+        
+        $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+
+        
+        $app->response()->header("Content-Type", "application/json");
+        echo json_encode($reportResult);
+    
+
+        // $return_msg = array("msg" => "This is listEvent Service");
+        
+        // $app->response()->header("Content-Type", "application/json");
+        // echo json_encode($return_msg);
+
+     }
+     
