@@ -97,6 +97,10 @@ configure :build do
   ignore '/javascripts/javascript-home-rmr-searchRTU/*'
   ignore '/javascripts/all.js'
   ignore '/javascripts/javascript-home-index_2015-11-19/*'
+  ignore '/javascripts/javascript-mbk-home/*'
+  ignore '/javascripts/javascript-mbk-home-events-management/*'
+  ignore '/javascripts/javascript-mbk-home-events/*'
+  
 
   ignore '/stylesheets/stylesheet-desktop-admin/*'
   ignore '/stylesheets/stylesheet-desktop-admin.css.erb'
@@ -113,6 +117,10 @@ configure :build do
   ignore '/stylesheets/all.css'
   ignore '/stylesheets/hello.scss'
   ignore '/stylesheets/normalize.css'
+  ignore '/stylesheets/stylesheet-mbk-home/*'
+  ignore '/stylesheets/stylesheet-mbk-home-events-management/*'
+  ignore '/stylesheets/stylesheet-mbk-home-events/*'
+  
 
   ignore '/src/desktop/Home_2015-12-04/*'
 

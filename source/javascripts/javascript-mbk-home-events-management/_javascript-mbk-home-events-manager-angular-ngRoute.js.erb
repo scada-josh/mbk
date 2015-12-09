@@ -1,0 +1,23 @@
+eventsManagerModule.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	// Your code here
+
+
+	<%= partial "javascript-mbk-home-events-management/_javascript-mbk-home-events-manager-angular-ngRoute-loadMainJS" %>
+
+	$routeProvider
+		.when('/View', {
+			templateUrl: 'events-views/view.php'
+		})
+		.otherwise({
+			templateUrl: 'events-views/main.php',
+			resolve: {
+                load: function () {
+                    loadMainJS()
+                }
+            }
+		});
+
+		// use the HTML5 History API
+        $locationProvider.html5Mode(true);
+
+}]);

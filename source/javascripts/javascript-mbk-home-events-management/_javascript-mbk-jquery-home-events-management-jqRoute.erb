@@ -1,0 +1,33 @@
+function jqueryRouteProvider(canvasID) {
+
+	if (canvasID != "default") {
+
+		$("#main-content > .canvas-eventsDataTable:visible").hide("slide", { direction: "left" }, 1000, function(){
+
+			$('#canvas-eventsDataTable-' + canvasID).fadeIn(300);
+
+		});
+
+	} else {
+		
+		$("#main-content > .canvas-eventsDataTable:visible").fadeOut(300, function(){
+
+			$('#canvas-eventsDataTable-' + canvasID).show("slide", { direction: "left" }, 1000, function(){});
+
+		});
+	}
+
+}
+
+
+$(function() {
+
+    $('.goto-default').click(function(){
+        jqueryRouteProvider('default');
+    });
+
+    $('.goto-add').click(function(){
+        jqueryRouteProvider('addForm');
+    });
+
+});
