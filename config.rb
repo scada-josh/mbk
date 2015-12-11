@@ -97,9 +97,19 @@ configure :build do
   ignore '/javascripts/javascript-home-rmr-searchRTU/*'
   ignore '/javascripts/all.js'
   ignore '/javascripts/javascript-home-index_2015-11-19/*'
+  ignore '/javascripts/javascript-home-index/*'
   ignore '/javascripts/javascript-mbk-home/*'
   ignore '/javascripts/javascript-mbk-home-events-management/*'
   ignore '/javascripts/javascript-mbk-home-events/*'
+  ignore '/javascripts/javascript-flaty_rmr_searchRTU/*'
+  ignore '/javascripts/javascript-flaty_rmr_searchRTU.js.erb'
+  ignore '/javascripts/javascript-flaty_administrator_member/*'
+  ignore '/javascripts/javascript-flaty_administrator_member.js.erb'
+  ignore '/javascripts/javascript-flaty_administrator_accessPolicy/*'
+  ignore '/javascripts/javascript-flaty_administrator_accessPolicy.js.erb'
+  ignore '/javascripts/javascript-flaty_blank.js.erb'
+  ignore '/javascripts/javascript-home-index.js.erb'
+  ignore '/javascripts/javascript-unitTest-bootstrapWizard/*'
   
 
   ignore '/stylesheets/stylesheet-desktop-admin/*'
@@ -120,15 +130,19 @@ configure :build do
   ignore '/stylesheets/stylesheet-mbk-home/*'
   ignore '/stylesheets/stylesheet-mbk-home-events-management/*'
   ignore '/stylesheets/stylesheet-mbk-home-events/*'
+  ignore '/stylesheets/stylesheet-flaty_administrator_accessPolicy/*'
+  ignore '/stylesheets/stylesheet-flaty_administrator_accessPolicy.css.erb'
+  ignore '/stylesheets/stylesheet-flaty_administrator_member/*'
+  ignore '/stylesheets/stylesheet-flaty_administrator_member.css.erb'
+  ignore '/stylesheets/stylesheet-flaty_blank.css.erb'
+  ignore '/stylesheets/stylesheet-flaty_index.css.erb'
+  ignore '/stylesheets/stylesheet-unitTest-bootstrapWizard/*'
+
+  ignore '/helper/bootstrap-wizard/*'
+  ignore '/helper/jquery-validation/*'
+  
   
 
-  ignore '/src/desktop/Home_2015-12-04/*'
-
-
-  ignore '/images/images-training-section2/*'
-  ignore '/images/images-training-section3/*'
-  ignore '/images/images-training-section4/*'
-  ignore '/images/images-training-section5/*'
 
   # For example, change the Compass output style for deployment
   # activate :minify_css
@@ -158,5 +172,6 @@ after_configuration do
   #sprockets.append_path File.join "#{root}", @bower_config["directory"]
 
   sprockets.append_path File.join "#{root}", "bower_components"
+  sprockets.append_path File.join "#{root}", "source"
   #sprockets.import_asset 'jquery'
 end

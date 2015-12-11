@@ -1,0 +1,14 @@
+function fnResetFormWizard() {
+
+	    // set done steps
+        jQuery('li', $('#addEvent-form-wizard')).removeClass("done");
+        var li_list = $('#addEvent-form-wizard > ul').find('li');
+        for (var i = 0; i < 0; i++) {
+            jQuery(li_list[i]).addClass("done");
+        }
+        $('#addEvent-form-wizard').bootstrapWizard('first');
+        $('#addEvent-form-wizard').find('.button-previous').hide();
+        $('#addEvent-form-wizard').find('.button-next').show();
+        $('#addEvent-form-wizard').find('.button-submit').hide();
+        
+}

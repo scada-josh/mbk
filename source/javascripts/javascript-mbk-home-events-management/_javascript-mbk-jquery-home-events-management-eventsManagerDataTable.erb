@@ -114,7 +114,7 @@ if (jQuery().dataTable) {
                         //tmpListEventControls = '<td class="text-center " style="vertical-align:middle">';
                         tmpListEventControls += '<div class="btn-group">';
                         tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="#" data-original-title="View"><i class="fa fa-search-plus"></i></a>';
-                        tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="#" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+                        tmpListEventControls += '<a class="btn btn-sm show-tooltip  goto-add" title="" href="javascript:;" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
                         tmpListEventControls += '<a class="btn btn-sm btn-danger show-tooltip" title="" href="#" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>';
                         tmpListEventControls += '</div>';
                         //tmpListEventControls += '</td>';
@@ -131,6 +131,33 @@ if (jQuery().dataTable) {
     });
 
 
+    $('#EventsManagerDataTable tbody').on('click', 'tr', function () {
+        //console.log(this);
+        //var row = $(this).closest("tr").get(0);
+        //console.log($(this));
+
+        // $(this).closest('tr').get(0).find('a > .goto-add').on('click', function(){
+        //  console.log("Hello");
+        // })
+
+        //var data = EventsManagerDataTable.row( this ).data();
+        //alert( 'You clicked on '+data[0]+'\'s row' );
+    } );
+
+    $('#EventsManagerDataTable tbody').on('click', 'tr a', function () {
+        //console.log($(this).attr('data-original-title'));
+        //console.log(this);
+
+        //console.log ( 'Row index: ' + EventsManagerDataTable.row(this).index() );
+
+        if ($(this).attr('data-original-title') == 'View') {
+            console.log('View');
+            jqueryRouteProvider('addForm');
+        } else if ($(this).attr('data-original-title') == 'Edit') {
+            console.log('Edit');
+        }
+
+    });
 
 
 }

@@ -1,0 +1,94 @@
+//----------------------------- Form Wizard -------------------------//
+if (jQuery().bootstrapWizard) {
+
+
+    $('#addEvent-form-wizard').bootstrapWizard({
+        'nextSelector': '.button-next',
+        'previousSelector': '.button-previous',
+        onTabClick: function (tab, navigation, index) {
+            alert('on tab click disabled');
+            return false;
+        },
+        onNext: function (tab, navigation, index) {
+            var total = navigation.find('li').length;
+            var current = index + 1;
+                // set wizard title
+                $('.step-title', $('#addEvent-form-wizard')).text('Step ' + (index + 1) + ' of ' + total);
+                // set done steps
+                jQuery('li', $('#addEvent-form-wizard')).removeClass("done");
+                var li_list = navigation.find('li');
+                for (var i = 0; i < index; i++) {
+                    jQuery(li_list[i]).addClass("done");
+                }
+
+                if (current == 1) {
+                    $('#addEvent-form-wizard').find('.button-previous').hide();
+                } else {
+                    $('#addEvent-form-wizard').find('.button-previous').show();
+                }
+
+                if (current >= total) {
+                    fnShowInfoFormWizard();
+
+                    $('#addEvent-form-wizard').find('.button-next').hide();
+                    $('#addEvent-form-wizard').find('.button-submit').show();
+                } else {
+                    $('#addEvent-form-wizard').find('.button-next').show();
+                    $('#addEvent-form-wizard').find('.button-submit').hide();
+                }
+                var $percent = (current / total) * 100;
+                $('#addEvent-form-wizard').find('.progress-bar').css('width', $percent+'%');
+
+                $('html, body').animate({scrollTop: $("#addEvent-form-wizard").offset().top}, 900);
+            },
+            onPrevious: function (tab, navigation, index) {
+                var total = navigation.find('li').length;
+                var current = index + 1;
+                // set wizard title
+                $('.step-title', $('#addEvent-form-wizard')).text('Step ' + (index + 1) + ' of ' + total);
+                // set done steps
+                jQuery('li', $('#addEvent-form-wizard')).removeClass("done");
+                var li_list = navigation.find('li');
+                for (var i = 0; i < index; i++) {
+                    jQuery(li_list[i]).addClass("done");
+                }
+
+                if (current == 1) {
+                    $('#addEvent-form-wizard').find('.button-previous').hide();
+                } else {
+                    $('#addEvent-form-wizard').find('.button-previous').show();
+                }
+
+                if (current >= total) {
+                    $('#addEvent-form-wizard').find('.button-next').hide();
+                    $('#addEvent-form-wizard').find('.button-submit').show();
+                } else {
+                    $('#addEvent-form-wizard').find('.button-next').show();
+                    $('#addEvent-form-wizard').find('.button-submit').hide();
+                }
+                var $percent = (current / total) * 100;
+                $('#addEvent-form-wizard').find('.progress-bar').css('width', $percent+'%');
+
+                $('html, body').animate({scrollTop: $("#addEvent-form-wizard").offset().top}, 900);
+            },
+            onTabShow: function (tab, navigation, index) {
+                var total = navigation.find('li').length;
+                var current = index + 1;
+                var $percent = (current / total) * 100;
+                $('#addEvent-form-wizard').find('.progress-bar').css({
+                    width: $percent + '%'
+                });
+            }
+        });
+
+    $('#addEvent-form-wizard').find('.button-previous').hide();
+    $('#addEvent-form-wizard .button-submit').click(function () {
+
+        alert('Finished!');
+
+        fnResetFormWizard();
+
+    }).hide();
+
+
+}
