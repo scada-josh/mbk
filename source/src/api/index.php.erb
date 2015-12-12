@@ -26,6 +26,7 @@ layout: "layout-api"
 
     /* Event manager */
     $app->post('/eventManager/listEvent/',function() use ($app, $pdo, $db) { listEvent($app, $pdo, $db); });
+    $app->get('/eventManager/listUser/',function() use ($app, $pdo, $db) { listUser($app, $pdo, $db); });
 	
 
 	$app->run();
@@ -39,5 +40,6 @@ layout: "layout-api"
 
     /* Event Manager Partial */
     <%= partial "/EventManager/_listEvent" %>
+    <%= partial "/EventManager/_listUser" %>
     
 ?>

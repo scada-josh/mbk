@@ -1,0 +1,86 @@
+var classActionAddEventFormWizard = new function() {
+
+    this.addEventFormWizardParam = {
+                                    "eventNameParam": "",
+                                    "locationNameParam": "",
+                                    "eventBeginDateParam": "",
+                                    "eventEndDateParam": "",
+                                    "listAttendeeParam": []
+                                  };
+
+    /* initialAddEventFormWizardParam manager */
+    this.initialAddEventFormWizardParam = function () {
+      //console.log(this.addEventFormWizardParam);
+    }                              
+
+    /* eventNameParam manager */
+    this.eventNameParam = function (txtName) {
+      this.addEventFormWizardParam.eventNameParam = txtName;
+      //console.log(this.addEventFormWizardParam);
+    }
+
+    /* locationNameParam manager */
+    this.locationNameParam = function (txtLocation) {
+      this.addEventFormWizardParam.locationNameParam = txtLocation;
+      //console.log(this.addEventFormWizardParam);
+    }
+
+    /* eventBeginDateParam manager */
+    this.eventBeginDateParam = function (myEventBeginDateParam) {
+      this.addEventFormWizardParam.eventBeginDateParam = myEventBeginDateParam;
+      //console.log(this.addEventFormWizardParam);
+    }
+
+    /* eventEndDateParam manager */
+    this.eventEndDateParam = function (myEventEndDateParam) {
+      this.addEventFormWizardParam.eventEndDateParam = myEventEndDateParam;
+      //console.log(this.addEventFormWizardParam);
+    }
+
+
+    /* listAttendeeParam manager */
+    this.addNewAttendee = function (record) {
+        //console.log('addNewAttendee');
+        //console.log(record);
+        this.addEventFormWizardParam.listAttendeeParam.push(record);
+        //console.log(this.addEventFormWizardParam);
+    };
+
+    this.removeAttendeeByID = function (recordID) {
+        //console.log('removeAttendeeByID : ' + recordID);
+        
+        arrayJsonObj = this.addEventFormWizardParam.listAttendeeParam;
+
+        $.each(arrayJsonObj, function(i, item) {
+          //console.log(i);
+          //console.log(item);
+
+            $.each(this, function(name, value) {
+                /// do stuff
+                //console.log(name + '=' + value);
+                if (value == recordID){
+                  arrayJsonObj.splice(i, 1);
+                }
+            });
+
+        });
+
+    };
+
+    this.modifiedAttendeeByID = function () {
+        console.log('modifiedAttendeeByID');
+        //return this.color + ' ' + this.type + ' apple';
+    };
+
+    this.submitAddEventFormWizard = function () {
+        //console.log('submitAddEventFormWizard');
+
+        alert('Finished!');
+        fnResetFormWizard();
+        //return this.color + ' ' + this.type + ' apple';
+    };
+}
+
+
+
+  

@@ -22,6 +22,7 @@ if (jQuery().bootstrapWizard) {
                 }
 
                 if (current == 1) {
+                    console.log(current);
                     $('#addEvent-form-wizard').find('.button-previous').hide();
                 } else {
                     $('#addEvent-form-wizard').find('.button-previous').show();
@@ -84,9 +85,7 @@ if (jQuery().bootstrapWizard) {
     $('#addEvent-form-wizard').find('.button-previous').hide();
     $('#addEvent-form-wizard .button-submit').click(function () {
 
-        alert('Finished!');
-
-        fnResetFormWizard();
+        classActionAddEventFormWizard.submitAddEventFormWizard();
 
     }).hide();
 

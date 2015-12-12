@@ -1,11 +1,201 @@
-//------------------------ EventsManager Data Table -----------------------//
+//------------------------ Attendee Data Table -----------------------//
 if (jQuery().dataTable) {
 
 
     var AddEventFormWizardAttendeeDataTable = $('#AddEventFormWizardAttendeeDataTable').DataTable( {
-        
+	    	"processing": true,
+	        "ajax": {
+	        	"url": "../../../../api/eventManager/listUser/",
+	        	"type": "GET",
+	            "dataSrc": "rows",
+	            // "success": function(data) {
+	            //     console.log(data);
+	            // },
+	            // "error": function(jqXHR, textStatus, errorThrown){
+	            //     alert('init error: ' + textStatus);
+	            // }
+	        },
+	        // กำหนดการแสดงผล Drop down เมนู
+	        "aLengthMenu": [
+	                [5, 10, 15, 25, 50, 100, -1],
+	                [5, 10, 15, 25, 50, 100, "All"]
+	            ],
+	        "iDisplayLength": 5,
+	        // กำหนดการแสดงผลบน label
+	        "oLanguage": {
+	                "sLengthMenu": "_MENU_ Records per page",
+	                "sInfo": "_START_ - _END_ of _TOTAL_",
+	                "sInfoEmpty": "0 - 0 of 0",
+	                "oPaginate": {
+	                    "sPrevious": "Prev",
+	                    "sNext": "Next"
+	                }
+	        },
+	        // กำหนดคอลัมภ์ให้สามารถ sort ได้หรือไม่
+	        "aoColumnDefs": [
+	                {
+	                	'sWidth': '50px', 
+	                    'bSortable': false,
+	                    "bAutoWidth": true,
+	                    'aTargets': [0]
+	                },
+	                {
+	                    'sWidth': '80px', 
+	                    'bSortable': true,
+	                    "bAutoWidth": false,
+	                    'aTargets': [1]
+	                },
+	                {
+	                    // The `data` parameter refers to the data for the cell (defined by the
+	                    // `data` option, which defaults to the column being worked with, in
+	                    // this case `data: 0`.
+	                    "render": function ( data, type, row ) {
+	                        //return '<input type="checkbox" />';
+	                        return '<input type="checkbox" class="case" name="case" value="' + row.id + '"/>';
+	                    },
+	                    "targets": 0
+	                },
+	                {
+	                    // The `data` parameter refers to the data for the cell (defined by the
+	                    // `data` option, which defaults to the column being worked with, in
+	                    // this case `data: 0`.
+	                    "render": function ( data, type, row ) {
+	                        return row.user_id;
+	                    },
+	                    "targets": 1
+	                },
+	                {
+	                    // The `data` parameter refers to the data for the cell (defined by the
+	                    // `data` option, which defaults to the column being worked with, in
+	                    // this case `data: 0`.
+	                    "render": function ( data, type, row ) {
+	                        return row.user_name;
+	                    },
+	                    "targets": 2
+	                },
+	                {
+	                    // The `data` parameter refers to the data for the cell (defined by the
+	                    // `data` option, which defaults to the column being worked with, in
+	                    // this case `data: 0`.
+	                    "render": function ( data, type, row ) {
+	                        return row.user_position;
+	                    },
+	                    "targets": 3
+	                },
+	                {
+	                    // The `data` parameter refers to the data for the cell (defined by the
+	                    // `data` option, which defaults to the column being worked with, in
+	                    // this case `data: 0`.
+	                    "render": function ( data, type, row ) {
+	                        //return row.user_division + '<br/><i>' + row.user_org + '</i>';
+	                        return row.user_division;
+	                    },
+	                    "targets": 4
+	                }
+	        ],
+	        "order" : [[ 1, 'asc' ]] //disable default sorting, eg sorting on 1st column
+
+
     });
 
+
+	// // Array holding selected row IDs
+ //   var rows_selected = [];
+
+
+	// Handle click on checkbox
+   $('#AddEventFormWizardAttendeeDataTable tbody').on('click', 'input[type="checkbox"]', function(e){
+
+      var $row = $(this).closest('tr');
+
+      // Get row data
+      var data = AddEventFormWizardAttendeeDataTable.row($row).data();
+
+      // // Get row ID
+      // var rowId = data[0];
+
+   //    console.log($row);
+   //    console.log($(this));
+
+   //    console.log($(this).prop('checked')); // true
+	  // console.log($(this).is(':checked')); // true
+	  // console.log($(this)[0].checked );     // true
+
+	  // console.log('val : ' + $(this).val());
+
+
+
+	  if ($(this).is(':checked')) {
+	  	classActionAddEventFormWizard.addNewAttendee(data);
+	  } else {
+	  	classActionAddEventFormWizard.removeAttendeeByID($(this).val());
+	  }
+      
+
+
+
+
+      // Determine whether row ID is in the list of selected row IDs 
+      //var index = $.inArray(rowId, rows_selected);
+
+      
+
+
+      // // If checkbox is checked and row ID is not in list of selected row IDs
+      // if(this.checked && index === -1){
+      //    rows_selected.push(rowId);
+
+      // // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      // } else if (!this.checked && index !== -1){
+      //    rows_selected.splice(index, 1);
+      // }
+
+
+      // if(this.checked){
+      //    $row.addClass('selected');
+      // } else {
+      //    $row.removeClass('selected');
+      // }
+
+      // // Update state of "Select all" control
+      // updateDataTableSelectAllCtrl(AddEventFormWizardAttendeeDataTable);
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+
+	// //
+	// // Updates "Select all" control in a data table
+	// //
+	// function updateDataTableSelectAllCtrl(table){
+	//    var $table             = table.table().node();
+	//    var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
+	//    var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
+	//    var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+
+	//    // If none of the checkboxes are checked
+	//    if($chkbox_checked.length === 0){
+	//       chkbox_select_all.checked = false;
+	//       if('indeterminate' in chkbox_select_all){
+	//          chkbox_select_all.indeterminate = false;
+	//       }
+
+	//    // If all of the checkboxes are checked
+	//    } else if ($chkbox_checked.length === $chkbox_all.length){
+	//       chkbox_select_all.checked = true;
+	//       if('indeterminate' in chkbox_select_all){
+	//          chkbox_select_all.indeterminate = false;
+	//       }
+
+	//    // If some of the checkboxes are checked
+	//    } else {
+	//       chkbox_select_all.checked = true;
+	//       if('indeterminate' in chkbox_select_all){
+	//          chkbox_select_all.indeterminate = true;
+	//       }
+	//    }
+	// }
 
 
 }

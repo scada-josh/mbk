@@ -6,15 +6,20 @@ function fnShowInfoFormWizard() {
   //    console.log('eventEndDate : ' + $('#eventEndDate').val());
      
 
-	var tmpEventName = $('#eventName').val();
-	var tmpLocationName = $('#locationName').val();
-	var tmpEventBeginDate = $('#eventBeginDate').val();
-	var tmpEventEndDate = $('#eventEndDate').val();
+    	var tmpEventName = $('#eventName').val();
+    	var tmpLocationName = $('#locationName').val();
+    	var tmpEventBeginDate = $('#eventBeginDate').val();
+    	var tmpEventEndDate = $('#eventEndDate').val();
 
-     $('#lblEventName').text(tmpEventName);
-     $('#lblLocationName').text(tmpLocationName);
-     $('#lblEventBeginDate').text(tmpEventBeginDate);
-     $('#lblEventEndDate').text(tmpEventEndDate);
+       $('#lblEventName').text(tmpEventName);
+       $('#lblLocationName').text(tmpLocationName);
+       $('#lblEventBeginDate').text(tmpEventBeginDate);
+       $('#lblEventEndDate').text(tmpEventEndDate);
+
+       classActionAddEventFormWizard.eventNameParam(tmpEventName);
+       classActionAddEventFormWizard.locationNameParam(tmpLocationName);
+       classActionAddEventFormWizard.eventBeginDateParam(tmpEventBeginDate);
+       classActionAddEventFormWizard.eventEndDateParam(tmpEventEndDate);
 }
 
 
