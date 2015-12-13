@@ -10,16 +10,37 @@ function fnShowInfoFormWizard() {
     	var tmpLocationName = $('#locationName').val();
     	var tmpEventBeginDate = $('#eventBeginDate').val();
     	var tmpEventEndDate = $('#eventEndDate').val();
+      var tmpCountAttendee = $('#AddEventFormWizardAttendeeDataTable tbody input[type="checkbox"]:checked').length;
 
        $('#lblEventName').text(tmpEventName);
        $('#lblLocationName').text(tmpLocationName);
        $('#lblEventBeginDate').text(tmpEventBeginDate);
        $('#lblEventEndDate').text(tmpEventEndDate);
+       $('#lblCountAttendee').text(classActionAddEventFormWizard.countAttendee + " คน");
+
+       // var d = new Date(tmpEventBeginDate);
+       // var n = d.getFullYear();
+       // console.log(n);
+
+       var tmpEventBeginDate = new Date($("#eventBeginDate").data('datepicker').getFormattedDate('yyyy-mm-dd'));
+       var tmpEventBeginDate_Year = tmpEventBeginDate.getUTCFullYear()-543;
+       var tmpEventBeginDate_Month = ((tmpEventBeginDate.getUTCMonth()+1) < 10 ? '0' : '') + (tmpEventBeginDate.getUTCMonth()+1);
+       var tmpEventBeginDate_Date = (tmpEventBeginDate.getUTCDate() < 10 ? '0' : '') + tmpEventBeginDate.getUTCDate();
+
+       //console.log(tmpEventBeginDate_Year);
+       //console.log(tmpEventBeginDate_Month);
+       //console.log(tmpEventBeginDate_Date);
+
+       var tmpEventEndDate = new Date($("#eventEndDate").data('datepicker').getFormattedDate('yyyy-mm-dd'));
+       var tmpEventEndDate_Year = tmpEventEndDate.getUTCFullYear()-543;
+       var tmpEventEndDate_Month = ((tmpEventEndDate.getUTCMonth()+1) < 10 ? '0' : '') + (tmpEventEndDate.getUTCMonth()+1);
+       var tmpEventEndDate_Date = (tmpEventEndDate.getUTCDate() < 10 ? '0' : '') + tmpEventEndDate.getUTCDate();
+       
 
        classActionAddEventFormWizard.eventNameParam(tmpEventName);
        classActionAddEventFormWizard.locationNameParam(tmpLocationName);
-       classActionAddEventFormWizard.eventBeginDateParam(tmpEventBeginDate);
-       classActionAddEventFormWizard.eventEndDateParam(tmpEventEndDate);
+       classActionAddEventFormWizard.eventBeginDateParam(tmpEventBeginDate_Year + "-" + tmpEventBeginDate_Month + "-" + tmpEventBeginDate_Date);
+       classActionAddEventFormWizard.eventEndDateParam(tmpEventEndDate_Year + "-" + tmpEventEndDate_Month + "-" + tmpEventEndDate_Date);
 }
 
 

@@ -3,8 +3,15 @@ function jqueryRouteProvider(canvasID) {
 	if (canvasID != "default") {
 
 		$("#main-content > .canvas-eventsDataTable:visible").hide("slide", { direction: "left" }, 1000, function(){
-
 			$('#canvas-eventsDataTable-' + canvasID).fadeIn(300);
+
+			if (canvasID == 'addEvent') {
+				fnBreadcrumb_partials_show('เพิ่มข้อมูลกิจกรรม');
+			} else if (canvasID == 'viewEvent') {
+				fnBreadcrumb_partials_show('ดูข้อมูลกิจกรรม');
+			} else if (canvasID == 'editEvent') {
+				fnBreadcrumb_partials_show('แก้ไขข้อมูลกิจกรรม');
+			}
 
 		});
 
@@ -14,6 +21,7 @@ function jqueryRouteProvider(canvasID) {
 
 			$('#canvas-eventsDataTable-' + canvasID).show("slide", { direction: "left" }, 1000, function(){});
 
+			fnBreadcrumb_partials_hide();
 		});
 	}
 
@@ -22,14 +30,23 @@ function jqueryRouteProvider(canvasID) {
 
 $(function() {
 
-    $('.goto-default').click(function(){
-    	//$('#canvas-eventsDataTable-addForm a[href="#tab2-1"]').tab('show') 
-        jqueryRouteProvider('default');
+    // $('.goto-default').on('click', function(){
+    // 	//$('#canvas-eventsDataTable-addEvent a[href="#tab2-1"]').tab('show') 
+    //     jqueryRouteProvider('default');
+    // });
+
+	$('body').on('click', '.goto-default', function () {
+		jqueryRouteProvider('default');
+	});
+
+    $('.goto-addEvent').on('click', function(){
+        jqueryRouteProvider('addEvent');
+        fnInitialFormWizard();
     });
 
-    $('.goto-add').click(function(){
-        jqueryRouteProvider('addForm');
-        fnInitialFormWizard();
+
+    $('#btnRefresh_EventsManagerDataTable').on('click', function() {
+    	EventsManagerDataTable.ajax.reload();
     });
 
 });

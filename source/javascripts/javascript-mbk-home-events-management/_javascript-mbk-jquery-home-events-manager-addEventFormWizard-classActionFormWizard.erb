@@ -8,9 +8,12 @@ var classActionAddEventFormWizard = new function() {
                                     "listAttendeeParam": []
                                   };
 
+    this.countAttendee;
+
     /* initialAddEventFormWizardParam manager */
     this.initialAddEventFormWizardParam = function () {
       //console.log(this.addEventFormWizardParam);
+      this.countAttendee = 0;
     }                              
 
     /* eventNameParam manager */
@@ -44,6 +47,8 @@ var classActionAddEventFormWizard = new function() {
         //console.log(record);
         this.addEventFormWizardParam.listAttendeeParam.push(record);
         //console.log(this.addEventFormWizardParam);
+
+        this.countAttendee++;
     };
 
     this.removeAttendeeByID = function (recordID) {
@@ -65,19 +70,62 @@ var classActionAddEventFormWizard = new function() {
 
         });
 
+        this.countAttendee--;
+
     };
 
     this.modifiedAttendeeByID = function () {
-        console.log('modifiedAttendeeByID');
+        //console.log('modifiedAttendeeByID');
         //return this.color + ' ' + this.type + ' apple';
+    };
+
+    this.selectAllAttendee = function () {
+
+
+        // var tmpCountAttendee = $('#AddEventFormWizardAttendeeDataTable tbody input[type="checkbox"]:checked').length;
+
+        var tmpAttendeeChecked = $('#AddEventFormWizardAttendeeDataTable tbody input[type="checkbox"]:checked');
+
+        $.each(tmpAttendeeChecked, function(i, item) {
+            //console.log(i + " : " + item);
+        });
+
+        // for (var i = 0; i < tmpAttendeeChecked.length; i++) {
+        //   console.log();
+        // };
+
+        //this.addEventFormWizardParam.listAttendeeParam.push(record);
+        //console.log(this.addEventFormWizardParam);
     };
 
     this.submitAddEventFormWizard = function () {
         //console.log('submitAddEventFormWizard');
+        //console.log(this.addEventFormWizardParam);
 
-        alert('Finished!');
-        fnResetFormWizard();
-        //return this.color + ' ' + this.type + ' apple';
+        $.ajax({
+          url: '../../../../api/eventManager/addEvent/',
+          type: 'POST',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify(this.addEventFormWizardParam),
+          cache: false,
+          //async: false,
+          success: function(data) {
+              console.log(data);
+              //alert('Finished!');
+              fnResetFormWizard();
+              EventsManagerDataTable.ajax.reload();
+              //EventsManagerDataTable.fnReloadAjax();
+              jqueryRouteProvider('default');
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+              alert('init error: ' + textStatus);
+            }
+          });
+
+
+
+        
     };
 }
 

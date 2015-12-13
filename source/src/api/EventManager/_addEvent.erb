@@ -1,0 +1,142 @@
+    /**
+     *
+     * @apiName AddEvent
+     * @apiGroup Event Manager
+     * @apiVersion 0.1.0
+     *
+     * @api {post} /eventManager/addEvent/ Add Event
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่เพิ่มรายการ Event พร้อมผู้เข้าร่วมประชุมเข้าไปในระบบ
+     *
+     *
+     * @apiSampleRequest /eventManager/addEvent/
+     *
+     * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
+     *
+     * @apiSuccessExample Example data on success:
+     * {
+     *   "msg": "Hello, anusorn"
+     * }
+     *
+     * @apiError UserNotFound The <code>id</code> of the User was not found.
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "error": "UserNotFound"
+     *     }
+     *
+     */
+     function addEvent($app, $pdo, $db) {
+
+        // {
+        //     "eventNameParam": "",
+        //     "locationNameParam": "",
+        //     "eventBeginDateParam": "",
+        //     "eventEndDateParam": "",
+        //     "listAttendeeParam": []
+        // }
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
+        /* ************************* */
+        $headers = $app->request->headers;
+        $ContetnType = $app->request->headers->get('Content-Type');
+
+        /**
+        * apidoc @apiSampleRequest, iOS RESTKit use content-type is "application/json"
+        * Web Form, Advance REST Client App use content-type is "application/x-www-form-urlencoded"
+        */
+        if ($ContetnType == "application/json") {
+
+            $request = $app->request();
+            $result = json_decode($request->getBody());
+
+            /* receive request */
+            $postEventName = $result->eventNameParam;
+            $postLocationName = $result->locationNameParam;
+            $postEventBeginDate = $result->eventBeginDateParam;
+            $postEventEndDate = $result->eventEndDateParam;
+            $postListAttendee = $result->listAttendeeParam;
+
+
+        } else if ($ContetnType == "application/x-www-form-urlencoded"){
+
+            //$userID = $app->request()->params('userID_param');
+            //$userID = $app->request()->post('userID_param');
+        }
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
+        /* ************************* */
+        $reports = array();
+
+
+        /* สร้างเลข event_id จากคอลัมภ์ id ที่มากที่สุด บวกไปอีก 1 */
+        $tmpMaxID = $db->events_tb->max('id');
+        $eventID = "event-".str_pad(($tmpMaxID + 1), 6, '0', STR_PAD_LEFT); 
+
+
+        /* insert or update event */
+        $insertUpdateEvent_result = $db->events_tb()->insert_update(
+                                                        array("event_id" => $eventID), // unique key
+                                                        array("event_name_th" => $postEventName,
+                                                              "event_location" => $postLocationName,
+                                                              "event_begin_date" => $postEventBeginDate,
+                                                              "event_end_date" => $postEventEndDate), // insert values if the row doesn't exist
+                                                        array("event_name_th" => $postEventName,
+                                                              "event_location" => $postLocationName,
+                                                              "event_begin_date" => $postEventBeginDate,
+                                                              "event_end_date" => $postEventEndDate) // update values otherwise
+                                                    );
+
+
+        /* insert or update attendee */
+        $numAttendee = count($postListAttendee);  // จำนวนผู้เข้าร่วมงาน - Attendee
+        $i=0;
+        for ($i=0; $i < $numAttendee; $i++) { 
+
+            $user_id = $postListAttendee[$i]->user_id;
+
+            $insertUpdateEventAttendeeCollector_result = $db->events_attendees_collectors_tb()->insert_update(
+                                                        array("eventID_userID" => $eventID."_".$user_id), // unique key
+                                                        array("event_id" => $eventID,
+                                                              "user_id" => $user_id), // insert values if the row doesn't exist
+                                                        array("event_id" => $eventID,
+                                                              "user_id" => $user_id) // update values otherwise
+                                                    );
+
+
+            $reports[] = array(
+                            "id" => $postListAttendee[$i]->id,
+                            "user_id" => $postListAttendee[$i]->user_id,
+                            "user_name" => $postListAttendee[$i]->user_name,
+                            "user_position" => $postListAttendee[$i]->user_position,
+                            "user_division" => $postListAttendee[$i]->user_division,
+                            "user_org" => $postListAttendee[$i]->user_org
+                        );
+        }
+
+        
+
+        $resultText = "success";
+        $reportResult = array("result" =>  $resultText, 
+                              "eventID" => $eventID,
+                              "eventName " => $postEventName, 
+                              "eventLocationName" => $postLocationName, 
+                              "eventBeginDate " => $postEventBeginDate, 
+                              "eventEndDate " => $postEventEndDate, 
+                              "listAttendee" => $reports);
+
+        
+        $app->response()->header("Content-Type", "application/json");
+        echo json_encode($reportResult);
+    
+
+        // $return_msg = array("msg" => "This is listEvent Service");
+        
+        // $app->response()->header("Content-Type", "application/json");
+        // echo json_encode($return_msg);
+
+     }
+     

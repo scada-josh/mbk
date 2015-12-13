@@ -47,6 +47,8 @@
     "angular-datatables": "~0.5.1",
     "jquery-ui": "~1.11.4",
     "jquery-validation": "~1.14.0",
-    "twitter-bootstrap-wizard": "~1.0.0"
+    "twitter-bootstrap-wizard": "~1.0.0",
+    "bootstrap-datepicker": "~1.5.0",
+    "moment": "~2.10.6"
   }
 }

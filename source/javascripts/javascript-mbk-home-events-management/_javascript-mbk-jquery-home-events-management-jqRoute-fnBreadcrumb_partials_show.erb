@@ -1,0 +1,6 @@
+function fnBreadcrumb_partials_show(myTitle) {
+	$('.events-partials-breadcrumb-eventLink span.eventLink').html('<a href="#" class="goto-default" style="color:black">Events</a>');
+	$('.events-partials-breadcrumb-angleRight').fadeIn().css('display','inline-block');
+	$('.events-partials-breadcrumb-titlePartial').fadeIn().css('display','inline-block');
+	$('.events-partials-breadcrumb-titlePartial').text(myTitle);
+}

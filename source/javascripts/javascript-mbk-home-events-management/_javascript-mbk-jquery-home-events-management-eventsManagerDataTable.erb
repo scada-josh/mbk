@@ -22,6 +22,10 @@ if (jQuery().dataTable) {
             //     alert('init error: ' + textStatus);
             // }
         },
+        // "columns": [
+        //     { "data": "id"},
+        //     { "data": "event_id"}
+        // ],
         // กำหนดการแสดงผล Drop down เมนู
         "aLengthMenu": [
                 [5, 10, 15, 25, 50, 100, -1],
@@ -114,7 +118,7 @@ if (jQuery().dataTable) {
                         //tmpListEventControls = '<td class="text-center " style="vertical-align:middle">';
                         tmpListEventControls += '<div class="btn-group">';
                         tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="#" data-original-title="View"><i class="fa fa-search-plus"></i></a>';
-                        tmpListEventControls += '<a class="btn btn-sm show-tooltip  goto-add" title="" href="javascript:;" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+                        tmpListEventControls += '<a class="btn btn-sm show-tooltip" title="" href="javascript:;" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
                         tmpListEventControls += '<a class="btn btn-sm btn-danger show-tooltip" title="" href="#" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>';
                         tmpListEventControls += '</div>';
                         //tmpListEventControls += '</td>';
@@ -131,7 +135,7 @@ if (jQuery().dataTable) {
     });
 
 
-    $('#EventsManagerDataTable tbody').on('click', 'tr', function () {
+    $('#EventsManagerDataTable tbody').on('click', 'tr', function (e) {
         //console.log(this);
         //var row = $(this).closest("tr").get(0);
         //console.log($(this));
@@ -140,21 +144,36 @@ if (jQuery().dataTable) {
         //  console.log("Hello");
         // })
 
-        //var data = EventsManagerDataTable.row( this ).data();
-        //alert( 'You clicked on '+data[0]+'\'s row' );
+        // var data = EventsManagerDataTable.row(this).data();
+        // console.log(data);
+        // console.log( 'You clicked on '+data.id+'\'s row' );
+
+
+
+
+        // Prevent click event from propagating to parent
+        e.stopPropagation();
+
     } );
 
     $('#EventsManagerDataTable tbody').on('click', 'tr a', function () {
         //console.log($(this).attr('data-original-title'));
         //console.log(this);
+        // console.log ( 'Row index: ' + EventsManagerDataTable.row(this).index() );
 
-        //console.log ( 'Row index: ' + EventsManagerDataTable.row(this).index() );
+        var data = EventsManagerDataTable.row($(this).closest('tr')).data();
+        console.log(data);
+        console.log( 'You clicked on '+data.id+'\'s row' );
+        
 
         if ($(this).attr('data-original-title') == 'View') {
-            console.log('View');
-            jqueryRouteProvider('addForm');
+            //console.log('View');
+            jqueryRouteProvider('viewEvent');
         } else if ($(this).attr('data-original-title') == 'Edit') {
-            console.log('Edit');
+            //console.log('Edit');
+            jqueryRouteProvider('editEvent');
+        } else if ($(this).attr('data-original-title') == 'Delete') {
+            console.log('Delete');
         }
 
     });
