@@ -49,6 +49,7 @@
     "jquery-validation": "~1.14.0",
     "twitter-bootstrap-wizard": "~1.0.0",
     "bootstrap-datepicker": "~1.5.0",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "aterrien/jQuery-Knob": "jquery-knob#~1.2.12"
   }
 }

@@ -1,13 +1,55 @@
-#main-content > .row > .col-md-12  {
-    display:table;
-    width:100%;
-    height:100%;
-    padding:100px 0;
-    /*color:#f4f4f4;*/
-    background: url(../images/mbk/BG_web01.jpg) no-repeat top center scroll;
-    background-color:#333333;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
+html,body{height:100%;}
+
+body {
+  /* Location of the image */
+  background-image: url(<%= '../' + images_dir + '/mbk/BG_web01.jpg' %>) !important;
+  
+  /* Image is centered vertically and horizontally at all times */
+  background-position: bottom center;
+  
+  /* Image doesn't repeat */
+  background-repeat: no-repeat;
+  
+  /* Makes the image fixed in the viewport so that it doesn't move when 
+     the content height is greater than the image height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based on its container's size */
+  background-size: cover;
+  
+  /* Pick a solid background color that will be displayed while the background image is loading */
+  background-color:#464646;
+  
+  /* SHORTHAND CSS NOTATION
+   * background: url(background-photo.jpg) center center cover no-repeat fixed;
+   */
 }
+
+/* For mobile devices */
+@media only screen and (max-width: 767px) {
+  body {
+    /* The file size of this background image is 93% smaller
+     * to improve page load speed on mobile internet connections */
+    background-image: url(<%= '../' + images_dir + '/mbk/BG_web01.jpg' %>) !important;
+    background-position: bottom center;
+  }
+}
+
+#main-content   {
+    background-color: transparent !important;
+}
+
+#home-menuTile {
+  /*  background-color:#464646;*/
+    /*background:rgba(60,175,250,0.2) !important;*/
+    background-color: transparent !important;
+    margin-left:1px;
+    margin-right:1px;
+}
+
+/*#main-content > #home-menuTile  {
+    background: url('../rmr/img-right.png') no-repeat bottom right scroll;
+}*/
+
+
+

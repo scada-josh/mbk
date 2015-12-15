@@ -168,7 +168,11 @@ if (jQuery().dataTable) {
 
         if ($(this).attr('data-original-title') == 'View') {
             //console.log('View');
+            $('#knobViewEvent').val(27).trigger('change');
+
             jqueryRouteProvider('viewEvent');
+
+
         } else if ($(this).attr('data-original-title') == 'Edit') {
             //console.log('Edit');
             jqueryRouteProvider('editEvent');

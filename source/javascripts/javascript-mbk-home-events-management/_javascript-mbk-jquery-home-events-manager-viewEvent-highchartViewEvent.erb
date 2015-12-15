@@ -1,0 +1,166 @@
+// var highchartViewEvent_height= $("#highchartViewEvent").height();
+// var highchartViewEvent_width= $("#highchartViewEvent").width();
+
+var highchartViewEvent = new Highcharts.Chart({
+    // chart: {
+    //     
+    //     margin: 0,
+    //     width: width,
+    //     height: height,
+    //     defaultSeriesType: 'areaspline'
+    // }
+
+        chart: {
+            renderTo: 'highchartViewEvent',
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            margin: 0,
+            // width: highchartViewEvent_width,
+            // height: highchartViewEvent_height
+        },
+        title: {
+            text: '',
+            align: 'center',
+            verticalAlign: 'middle',
+            y: 50
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    distance: -50,
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textShadow: '0px 1px 2px black'
+                    }
+                },
+                point: {
+                    events: {
+                        click:function(){
+                            var y = this.y;
+                            
+                            this.series.chart.setTitle({
+                                text: y + ' คน'
+                            });
+                        }
+                    }
+                },
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '75%']
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'สถิติการเข้าร่วมกิจกรรม',
+            innerSize: '50%',
+            data: [
+                    ['เข้าร่วม', 20],
+                    ['ไม่เข้าร่วม', 5]
+                    // ,
+                    // ['Chrome', 12.8],
+                    // ['Safari', 8.5],
+                    // ['Opera', 6.2], 
+                    // {
+                    //     name: 'Others',
+                    //     y: 0.7,
+                    //     dataLabels: {
+                    //         enabled: false
+                    //     }
+                    // }
+                ]
+        }],
+        credits: {
+          enabled: false
+        }
+});
+
+
+
+$( window ).resize(function() {
+  highchartViewEvent.redraw();
+  highchartViewEvent.reflow();
+});
+
+
+
+
+
+
+
+
+// $('#highchartViewEvent').highcharts({
+//         chart: {
+//             plotBackgroundColor: null,
+//             plotBorderWidth: 0,
+//             plotShadow: false,
+//             margin: 0,
+//             width: highchartViewEvent_width,
+//             height: highchartViewEvent_height
+//         },
+//         title: {
+//             text: '',
+//             align: 'center',
+//             verticalAlign: 'middle',
+//             y: 50
+//         },
+//         tooltip: {
+//             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+//         },
+//         plotOptions: {
+//             pie: {
+//                 dataLabels: {
+//                     enabled: true,
+//                     distance: -50,
+//                     style: {
+//                         fontWeight: 'bold',
+//                         color: 'white',
+//                         textShadow: '0px 1px 2px black'
+//                     }
+//                 },
+//                 point: {
+//                     events: {
+//                         click:function(){
+//                             var y = this.y;
+                            
+//                             this.series.chart.setTitle({
+//                                 text: y + '%'
+//                             });
+//                         }
+//                     }
+//                 },
+//                 startAngle: -90,
+//                 endAngle: 90,
+//                 center: ['50%', '75%']
+//             }
+//         },
+//         series: [{
+//             type: 'pie',
+//             name: 'สถิติการเข้าร่วมกิจกรรม',
+//             innerSize: '50%',
+//             data: [
+//                     ['เข้าร่วม', 45.0],
+//                     ['ไม่เข้าร่วม', 26.8],
+//                     ['Chrome', 12.8],
+//                     ['Safari', 8.5],
+//                     ['Opera', 6.2], 
+//                     {
+//                         name: 'Others',
+//                         y: 0.7,
+//                         dataLabels: {
+//                             enabled: false
+//                         }
+//                     }
+//                 ]
+//         }],
+//         credits: {
+//           enabled: false
+//         }
+//     });
+
+//$('#highchartViewEvent').highcharts().reflow();

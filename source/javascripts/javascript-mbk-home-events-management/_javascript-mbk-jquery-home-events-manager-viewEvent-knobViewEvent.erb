@@ -1,0 +1,35 @@
+// <input  id="knobViewEvent" 
+//                 class="knob" 
+//                 data-width="200" 
+//                 data-displayInput=true 
+//                 value="35" 
+//                 data-angleArc="180" 
+//                 data-angleOffset="-90" 
+//                 data-linecap="round" 
+//                 data-thickness=".4" 
+//                 data-fgColor="chartreuse">
+
+
+$("#knobViewEvent").knob({
+		'readOnly': true,
+	    'fgColor': "#00ABC6",
+	    'bgColor': "#666666",
+	    'thickness': 0.2,
+	    'angleArc': 180,
+	    'angleOffset': -90,
+		'format' : function (value) {
+			//console.log(value);
+			return value + '%';
+		}
+});
+
+
+$( window ).resize(function() {
+    $("#knobViewEvent").redrawKnob();
+});
+
+
+
+
+
+
