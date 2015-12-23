@@ -1,14 +1,14 @@
     /**
      *
-     * @apiName ListEvent
+     * @apiName ChartEvent12MonthSerie
      * @apiGroup Event Manager
      * @apiVersion 0.1.0
      *
-     * @api {post} /eventManager/listEvent/ List Event
-     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ
+     * @api {get} /eventManager/chartEvent12MonthSerie/ Serie for chartEvent12MonthID
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการข้อมูลสำหรับแสดงผลบนกราฟ chartEvent12MonthSerieID
      *
      *
-     * @apiSampleRequest /eventManager/listEvent/
+     * @apiSampleRequest /eventManager/chartEvent12MonthSerie/
      *
      * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
      *
@@ -25,7 +25,7 @@
      *     }
      *
      */
-     function listEvent($app, $pdo, $db) {
+     function chartEvent12MonthSerie($app, $pdo, $db) {
 
         /* ************************* */
         /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
@@ -58,44 +58,38 @@
         /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
         /* ************************* */
         $reports = array();
+        $mons = explode(" ","0 ม.ค. ก.พ. มี.ค. เม.ย. พ.ค. มิ.ย. ก.ค. ส.ค. ก.ย. ต.ค. พ.ย. ธ.ค.");
+        $eventCount = 0;
 
-        $results = $db->events_tb->order("event_id ASC");
+        for ($i = 1; $i <= 12; $i++) {
+            
+            $results = $db->events_tb->where("YEAR(event_begin_date) = ? AND MONTH(event_begin_date) = ?", 2015, $i)->order("event_id ASC");
 
-        foreach ($results as $result) {
-
-
-            $result_participate = $db->events_attendees_collectors_tb->where("event_id = ? and attention_status = 1", $result["event_id"])->count("*");
-            $result_register = $db->events_attendees_collectors_tb->where("event_id = ?", $result["event_id"])->count("*");
+            $rowCount = count($results);
 
             $reports[] = array(
-                "id" => $result["id"],
-                "event_id" => $result["event_id"],
-                "event_name_th" => $result["event_name_th"],
-                "event_name_eng" => $result["event_name_eng"],
-                "event_location" => $result["event_location"],
-                "event_begin_date" => $result["event_begin_date"],
-                "event_end_date" => $result["event_end_date"],
-                "event_active" => $result["event_active"],
-                "created_datetime" => $result["created_datetime"],
-                "modified_datetime" => $result["modified_datetime"],
-                "countParticipate" => $result_participate,
-                "countRegister" => $result_register
+                "name" => $mons[$i],
+                "value" => $rowCount
                 );
+
+            $eventCount = $eventCount + $rowCount;
+            $rowCount = 0;
         }
-
-        $rowCount = count($results);
-
 
         /* ************************* */
         /* เริ่มกระบวนการส่งค่ากลับ */
         /* ************************* */
         $resultText = "success";
         
-        $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+        $reportResult = array("result" =>  $resultText, "count"=>$eventCount, "rows" => $reports);
 
         
         $app->response()->header("Content-Type", "application/json");
         echo json_encode($reportResult);
+
+
+
+    
     
 
         // $return_msg = array("msg" => "This is listEvent Service");

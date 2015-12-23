@@ -1,0 +1,47 @@
+function jqueryRouteProviderForEventsDashboard(canvasID) {
+
+		// console.log(canvasID);
+
+		// console.log($('#canvas-eventsDashboard-' + canvasID).is(':visible'));
+
+		if (!$('#canvas-eventsDashboard-' + canvasID).is(':visible')) {
+
+			$("#main-content > .canvas-eventsDashboard:visible")
+			.fadeOut(300, function(){
+				$('#canvas-eventsDashboard-' + canvasID).fadeIn(300);
+
+				if (canvasID == 'DisplayContent_01') {
+					if(chartEvent12MonthID) {
+						chartEvent12MonthID.redraw();
+						chartEvent12MonthID.reflow();
+					}
+				} else if (canvasID == 'DisplayContent_02') {
+					if(chartEmployeeAllID) {
+						chartEmployeeAllID.redraw();
+						chartEmployeeAllID.reflow();
+					}
+				}
+			});
+
+		}
+
+}
+
+
+
+$(function() {
+
+
+
+	$('#goto-DisplayContent_01').on('click', function(){
+		jqueryRouteProviderForEventsDashboard('DisplayContent_01');
+	});
+
+	$('#goto-DisplayContent_02').on('click', function(){
+		jqueryRouteProviderForEventsDashboard('DisplayContent_02');
+	});
+
+
+});
+
+

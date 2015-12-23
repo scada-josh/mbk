@@ -1,14 +1,14 @@
     /**
      *
-     * @apiName ListEvent
+     * @apiName SummaryEmployeeByDivision
      * @apiGroup Event Manager
      * @apiVersion 0.1.0
      *
-     * @api {post} /eventManager/listEvent/ List Event
-     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ
+     * @api {get} /eventManager/summaryEmployeeByDivision/ Summary Employee By Division
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการพนักงานแยกตามแผนก (Division)
      *
      *
-     * @apiSampleRequest /eventManager/listEvent/
+     * @apiSampleRequest /eventManager/summaryEmployeeByDivision/
      *
      * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
      *
@@ -25,7 +25,7 @@
      *     }
      *
      */
-     function listEvent($app, $pdo, $db) {
+     function summaryEmployeeByDivision($app, $pdo, $db) {
 
         /* ************************* */
         /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
@@ -59,31 +59,22 @@
         /* ************************* */
         $reports = array();
 
-        $results = $db->events_tb->order("event_id ASC");
+
+        $results  = $db->user_tb->select("DISTINCT user_division");
 
         foreach ($results as $result) {
 
-
-            $result_participate = $db->events_attendees_collectors_tb->where("event_id = ? and attention_status = 1", $result["event_id"])->count("*");
-            $result_register = $db->events_attendees_collectors_tb->where("event_id = ?", $result["event_id"])->count("*");
+            $tmpCountEmployees = $db->user_tb->where("user_division = ?", $result["user_division"])->count();
 
             $reports[] = array(
-                "id" => $result["id"],
-                "event_id" => $result["event_id"],
-                "event_name_th" => $result["event_name_th"],
-                "event_name_eng" => $result["event_name_eng"],
-                "event_location" => $result["event_location"],
-                "event_begin_date" => $result["event_begin_date"],
-                "event_end_date" => $result["event_end_date"],
-                "event_active" => $result["event_active"],
-                "created_datetime" => $result["created_datetime"],
-                "modified_datetime" => $result["modified_datetime"],
-                "countParticipate" => $result_participate,
-                "countRegister" => $result_register
-                );
+                "division" => $result["user_division"],
+                "countEmployees" => $tmpCountEmployees
+            );
+
         }
 
-        $rowCount = count($results);
+        $countDivision = count($results);
+        $countEmployees = $db->user_tb->count();
 
 
         /* ************************* */
@@ -91,11 +82,15 @@
         /* ************************* */
         $resultText = "success";
         
-        $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+        $reportResult = array("result" =>  $resultText, "countEmployees"=>$countEmployees, "countDivision"=>$countDivision, "rows" => $reports);
 
         
         $app->response()->header("Content-Type", "application/json");
         echo json_encode($reportResult);
+
+
+
+    
     
 
         // $return_msg = array("msg" => "This is listEvent Service");

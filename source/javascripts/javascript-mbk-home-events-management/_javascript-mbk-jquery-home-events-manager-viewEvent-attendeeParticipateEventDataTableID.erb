@@ -1,12 +1,43 @@
 //------------------------ attendeeParticipateEvent Data Table -----------------------//
 
     if (jQuery().dataTable) {
-        var attendeeParticipateEventDataTableID = $('#attendeeParticipateEventDataTableID').dataTable({
-            "aLengthMenu": [
-                [10, 15, 25, 50, 100, -1],
-                [10, 15, 25, 50, 100, "All"]
+
+        var postEventID = "event-0001";
+
+
+
+        var AttendeeParticipateEventDataTableID = $('#AttendeeParticipateEventDataTableID').DataTable({
+            "processing": true,
+            // "serverSide": true,
+            //scrollY: '40vh',
+            //scrollCollapse: true,
+
+            "ajax": {
+                "url": "../../../../api/eventManager/listAttendeeByEventID/",
+                "type": "POST",
+                "dataType": "json",
+                "contentType": "application/json",
+                "data":function(d){
+                    console.log("postEventID : " + postEventID);
+                    return JSON.stringify({"eventID" : postEventID});
+                },
+                "dataSrc": "rows"
+                // "success": function(data) {
+                //     console.log(data);
+                // },
+                // "error": function(jqXHR, textStatus, errorThrown){
+                //     alert('init error: ' + textStatus);
+                // }
+            },
+            "columns": [
+                { "data": "id"},
+                { "data": "user_name"}
             ],
-            "iDisplayLength": 10,
+            "aLengthMenu": [
+                [5, 10, 15, 25, 50, 100, -1],
+                [5, 10, 15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 5,
             "oLanguage": {
                 "sLengthMenu": "_MENU_ Records per page",
                 "sInfo": "_START_ - _END_ of _TOTAL_",
@@ -17,17 +48,56 @@
                 }
             },
             "aoColumnDefs": [{
-                'bSortable': false,
-                'aTargets': [0]
-            }]
+                                'bSortable': true,
+                                "bAutoWidth": true,
+                                'aTargets': [0]
+                            },{
+                                'bSortable': true,
+                                "bAutoWidth": true,
+                                'aTargets': [1]
+                            },{
+                                "render": function ( data, type, row ) {
+                                    console.log(data);
+                                    console.log(type);
+                                    console.log(row);
+
+                                    return row.id;
+                                },
+                                "targets": 0
+                            },{
+                                "render": function ( data, type, row ) {
+                                    return row.user_name;
+                                },
+                                "targets": 1
+                            },{
+                                "render": function ( data, type, row ) {
+                                    return row.user_name;
+                                },
+                                "targets": 2
+                            }],
+            "order" : [] //disable default sorting, eg sorting on 1st column
         });
     }
 
 
 
+            // $.ajax({
+            //     url: "../../../../api/eventManager/listAttendeeByEventID/",
+            //     type: 'POST',
+            //     contentType: 'application/json',
+            //     dataType: 'json',
+            //     data: JSON.stringify(attendeeParticipateEventDataTable_param) , 
+            //     cache: false,
+            //     async: false,
+            //     success: function(data) {
+            //         console.log(data);
+            //     },
+            //     error: function(jqXHR, textStatus, errorThrown){
+            //         alert('init error: ' + textStatus);
+            //     }
+            // });
 
 
-
-
-
+// console.log("AttendeeParticipateEventDataTableID : " + AttendeeParticipateEventDataTableID);
+// console.log(AttendeeParticipateEventDataTableID);
 

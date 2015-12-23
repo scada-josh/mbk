@@ -1,0 +1,81 @@
+var chartEmployeeAllID;
+
+$.ajax({
+    url: '../../../api/eventManager/summaryEmployeeByDivision/',
+    type: 'GET',
+    contentType: 'application/json',
+    dataType: 'json',
+    cache: false,
+    //async: false,
+    success: function(data) {
+        // console.log(data);
+        // console.log(data.rows);
+
+        $('#goto-DisplayContent_02 > div > div.content > p.big').text(data.countEmployees);
+
+
+        var processed_json = new Array();
+        $.map(data.rows, function(obj, i) {
+            processed_json.push([obj.division, parseInt(obj.countEmployees)]);
+        });
+
+        chartEmployeeAllID = new Highcharts.Chart({
+                chart: {
+                    type: 'pie',
+                    renderTo: 'chartEmployeeAllID',
+                    margin: 0,
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: 'กราฟแสดงจำนวนพนักงาน บริษัท MBK'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
+                    }
+                },
+                // series: [{
+                //     type: 'pie',
+                //     name: 'Browser share',
+                //     data: [
+                //     ['Firefox',   45.0],
+                //     ['IE',       26.8],
+                //     {
+                //         name: 'Chrome',
+                //         y: 12.8,
+                //         sliced: true,
+                //         selected: true
+                //     },
+                //     ['Safari',    8.5],
+                //     ['Opera',     6.2],
+                //     ['Others',   0.7]
+                //     ]
+                // }],
+                series: [{
+                    type: 'pie',
+                    name: 'พนักงานบริษัท MBK',
+                    data: processed_json
+                }],
+                credits: {
+                  enabled: false
+                }
+        });
+
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+        alert('init error: ' + textStatus);
+    }
+});

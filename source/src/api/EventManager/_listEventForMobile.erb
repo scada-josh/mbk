@@ -1,14 +1,14 @@
     /**
      *
-     * @apiName ListEvent
+     * @apiName ListEventForMobile
      * @apiGroup Event Manager
      * @apiVersion 0.1.0
      *
-     * @api {post} /eventManager/listEvent/ List Event
-     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ
+     * @api {get} /eventManager/listEventForMobile/ List Event for Mobile
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ สำหรับ Mobile
      *
      *
-     * @apiSampleRequest /eventManager/listEvent/
+     * @apiSampleRequest /eventManager/listEventForMobile/
      *
      * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
      *
@@ -25,7 +25,7 @@
      *     }
      *
      */
-     function listEvent($app, $pdo, $db) {
+     function listEventForMobile($app, $pdo, $db) {
 
         /* ************************* */
         /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
@@ -63,10 +63,6 @@
 
         foreach ($results as $result) {
 
-
-            $result_participate = $db->events_attendees_collectors_tb->where("event_id = ? and attention_status = 1", $result["event_id"])->count("*");
-            $result_register = $db->events_attendees_collectors_tb->where("event_id = ?", $result["event_id"])->count("*");
-
             $reports[] = array(
                 "id" => $result["id"],
                 "event_id" => $result["event_id"],
@@ -77,9 +73,7 @@
                 "event_end_date" => $result["event_end_date"],
                 "event_active" => $result["event_active"],
                 "created_datetime" => $result["created_datetime"],
-                "modified_datetime" => $result["modified_datetime"],
-                "countParticipate" => $result_participate,
-                "countRegister" => $result_register
+                "modified_datetime" => $result["modified_datetime"]
                 );
         }
 
@@ -91,7 +85,8 @@
         /* ************************* */
         $resultText = "success";
         
-        $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+        // $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+        $reportResult = $reports;
 
         
         $app->response()->header("Content-Type", "application/json");

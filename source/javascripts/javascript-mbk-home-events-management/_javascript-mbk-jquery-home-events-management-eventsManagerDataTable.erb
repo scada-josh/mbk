@@ -96,7 +96,7 @@ if (jQuery().dataTable) {
                         tmpListEvents += '<strong style="color: #428bca">' + row.event_name_th + '</strong><br/>';
                         tmpListEvents += '<i>' + row.event_location + '</i><br/>';
                         tmpListEvents += '<i class="fa fa-clock-o blue"> &nbsp;</i><i>' + row.event_begin_date + '</i> &nbsp;';
-                        tmpListEvents += '<i class="fa fa-user blue"> &nbsp;</i><i>7/20</i>';
+                        tmpListEvents += '<i class="fa fa-user blue"> &nbsp;</i><i>' + row.countParticipate + '/' + row.countRegister + '</i>';
                         tmpListEvents += '</div>';
                         tmpListEvents += '</div>';
 
@@ -163,14 +163,24 @@ if (jQuery().dataTable) {
 
         var data = EventsManagerDataTable.row($(this).closest('tr')).data();
         console.log(data);
-        console.log( 'You clicked on '+data.id+'\'s row' );
+        console.log( 'You clicked on ' + data.id+'\'s row' );
+        console.log( 'You clicked on event_id :  ' + data.event_id );
+
+
+        // reload attendee datatable
+        postEventID = data.event_id;
+        
         
 
         if ($(this).attr('data-original-title') == 'View') {
             //console.log('View');
             $('#knobViewEvent').val(27).trigger('change');
 
+            AttendeeParticipateEventDataTableID.ajax.reload();
             jqueryRouteProvider('viewEvent');
+
+
+            
 
 
         } else if ($(this).attr('data-original-title') == 'Edit') {
@@ -185,4 +195,6 @@ if (jQuery().dataTable) {
 
 }
 
+// console.log("EventsManagerDataTable : " + EventsManagerDataTable);
+// console.log(EventsManagerDataTable);
 

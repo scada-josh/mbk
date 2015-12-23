@@ -9,6 +9,9 @@ function jqueryRouteProvider(canvasID) {
 				fnBreadcrumb_partials_show('เพิ่มข้อมูลกิจกรรม');
 			} else if (canvasID == 'viewEvent') {
 				fnBreadcrumb_partials_show('ดูข้อมูลกิจกรรม');
+
+				
+
 				//highchartViewEvent.redraw();
 				//highchartViewEvent.reflow();
 			} else if (canvasID == 'editEvent') {
@@ -49,6 +52,11 @@ $(function() {
 
     $('#btnRefresh_EventsManagerDataTable').on('click', function() {
     	EventsManagerDataTable.ajax.reload();
+    	//AttendeeParticipateEventDataTableID.ajax.reload();
+
+    	// console.log(EventsManagerDataTable);
+    	// console.log(AttendeeParticipateEventDataTableID);
+
     });
 
 });

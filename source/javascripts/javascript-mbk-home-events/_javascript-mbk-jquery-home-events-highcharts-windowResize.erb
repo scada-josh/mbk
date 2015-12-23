@@ -1,0 +1,13 @@
+$( window ).resize(function() {
+
+	if(chartEvent12MonthID) {
+	  chartEvent12MonthID.redraw();
+	  chartEvent12MonthID.reflow();
+	}
+	
+	if(chartEmployeeAllID) {
+	  chartEmployeeAllID.redraw();
+	  chartEmployeeAllID.reflow();
+	}
+
+});

@@ -28,7 +28,10 @@ layout: "layout-api"
     $app->post('/eventManager/listEvent/',function() use ($app, $pdo, $db) { listEvent($app, $pdo, $db); });
     $app->get('/eventManager/listUser/',function() use ($app, $pdo, $db) { listUser($app, $pdo, $db); });
     $app->post('/eventManager/addEvent/',function() use ($app, $pdo, $db) { addEvent($app, $pdo, $db); });
-	
+    $app->get('/eventManager/chartEvent12MonthSerie/',function() use ($app, $pdo, $db) { chartEvent12MonthSerie($app, $pdo, $db); });
+    $app->get('/eventManager/summaryEmployeeByDivision/',function() use ($app, $pdo, $db) { summaryEmployeeByDivision($app, $pdo, $db); });
+	$app->get('/eventManager/listEventForMobile/',function() use ($app, $pdo, $db) { listEventForMobile($app, $pdo, $db); });
+    $app->post('/eventManager/listAttendeeByEventID/',function() use ($app, $pdo, $db) { listAttendeeByEventID($app, $pdo, $db); });
 
 	$app->run();
 
@@ -43,5 +46,9 @@ layout: "layout-api"
     <%= partial "/EventManager/_listEvent" %>
     <%= partial "/EventManager/_listUser" %>
     <%= partial "/EventManager/_addEvent" %>
+    <%= partial "/EventManager/_chartEvent12MonthSerie" %>
+    <%= partial "/EventManager/_summaryEmployeeByDivision" %>
+    <%= partial "/EventManager/_listEventForMobile" %>
+    <%= partial "/EventManager/_listAttendeeByEventID" %>
     
 ?>

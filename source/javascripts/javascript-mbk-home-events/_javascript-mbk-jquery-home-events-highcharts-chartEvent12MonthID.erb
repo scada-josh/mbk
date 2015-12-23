@@ -1,0 +1,138 @@
+// var json = [{
+//     "key": "ม.ค.",
+//     "value": "4"
+// }, {
+//     "key": "ก.พ.",
+//     "value": "7"
+// }, {
+//     "key": "Bananas",
+//     "value": "9"
+// }];
+
+
+// var processed_json = new Array();
+// $.map(json, function(obj, i) {
+//     processed_json.push([obj.key, parseInt(obj.value)]);
+// });
+
+// console.log(processed_json);
+
+
+
+var chartEvent12MonthID;
+
+
+
+$.ajax({
+    url: '../../../api/eventManager/chartEvent12MonthSerie/',
+    type: 'GET',
+    contentType: 'application/json',
+    dataType: 'json',
+    cache: false,
+    //async: false,
+    success: function(data) {
+        // console.log(data);
+        // console.log(data.rows);
+
+        $('#goto-DisplayContent_01 > div > div.content > p.big').text(data.count);
+
+        var processed_json = new Array();
+        $.map(data.rows, function(obj, i) {
+            processed_json.push([obj.name, parseInt(obj.value)]);
+        });
+
+        chartEvent12MonthID = new Highcharts.Chart({
+                chart: {
+                    type: 'column',
+                    margin: 75,
+                    renderTo: 'chartEvent12MonthID',
+                    options3d: {
+                        enabled: true,
+                        alpha: 10,
+                        beta: 25,
+                        depth: 70
+                    }
+                },
+                title: {
+                    text: 'กราฟแสดงจำนวนกิจกรรม ภายใน MBK'
+                },
+                subtitle: {
+                    text: 'กราฟแสดงจำนวนกิจกรรมย้อนหลัง 12 เดือน'
+                },
+                plotOptions: {
+                    column: {
+                        depth: 25
+                    }
+                },
+                // xAxis: {
+                //     categories: Highcharts.getOptions().lang.shortMonths
+                // },
+                xAxis: {
+                    type: "category"
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                series: [{
+                    data: processed_json
+                }],
+                credits: {
+                  enabled: false
+                }
+        });
+
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+        alert('init error: ' + textStatus);
+    }
+});
+
+
+
+    // $('#chartEvent12MonthID').highcharts({
+    //     chart: {
+    //         type: 'column',
+    //         margin: 75,
+    //         options3d: {
+    //             enabled: true,
+    //             alpha: 10,
+    //             beta: 25,
+    //             depth: 70
+    //         }
+    //     },
+    //     title: {
+    //         text: 'กราฟแสดงจำนวนกิจกรรม ภายใน MBK'
+    //     },
+    //     subtitle: {
+    //         text: 'กราฟแสดงจำนวนกิจกรรมย้อนหลัง 12 เดือน'
+    //     },
+    //     plotOptions: {
+    //         column: {
+    //             depth: 25
+    //         }
+    //     },
+    //     // xAxis: {
+    //     //     categories: Highcharts.getOptions().lang.shortMonths
+    //     // },
+    //     xAxis: {
+    //         type: "category"
+    //     },
+    //     yAxis: {
+    //         title: {
+    //             text: null
+    //         }
+    //     },
+    //     series: [{
+    //         data: processed_json
+    //     }],
+    //     credits: {
+    //       enabled: false
+    //     }
+    // });
+
+
+
+
+

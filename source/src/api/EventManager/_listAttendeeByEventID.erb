@@ -1,14 +1,14 @@
     /**
      *
-     * @apiName ListEvent
+     * @apiName ListAttendeeByEventID
      * @apiGroup Event Manager
      * @apiVersion 0.1.0
      *
-     * @api {post} /eventManager/listEvent/ List Event
-     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการ Event ที่มีในระบบ
+     * @api {post} /eventManager/listAttendeeByEventID/ List Attendee By Event ID
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงรายการชื่อและสถานะการเข้าร่วมกิจกรรม แยกตามรหัสกิจกรรม (Event ID)
      *
      *
-     * @apiSampleRequest /eventManager/listEvent/
+     * @apiSampleRequest /eventManager/listAttendeeByEventID/
      *
      * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
      *
@@ -25,7 +25,10 @@
      *     }
      *
      */
-     function listEvent($app, $pdo, $db) {
+     function listAttendeeByEventID($app, $pdo, $db) {
+
+        $postEventID = "event-0001";
+        $postEventID2 = "";
 
         /* ************************* */
         /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
@@ -40,65 +43,78 @@
         if ($ContetnType == "application/json") {
 
             $request = $app->request();
-            $result = json_decode($request->getBody());
+            $request_result = json_decode($request->getBody());
 
             /* receive request */
-            // $postUserName = $result->userName;
+             $postEventID = $request_result->eventID;
             // $postPassWord = $result->passWord;
 
 
         } else if ($ContetnType == "application/x-www-form-urlencoded"){
 
             //$userID = $app->request()->params('userID_param');
-            //$userID = $app->request()->post('userID_param');
-        }
+            $postEventID = $app->request()->post('eventID');
+
+        } 
+        // else if ($ContetnType == "application/json; charset=UTF-8") {
+        //     //$request = $app->request();
+        //     //$postEventID2 = $app->request();
+        //     $request = $app->request();
+        //     $request_result = json_decode($request->getBody());
+
+        //     $postEventID = $request_result->eventID;
+
+        // } else {
+
+        // }
+
 
 
         /* ************************* */
         /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
         /* ************************* */
         $reports = array();
+        $countParticipate = 0;
 
-        $results = $db->events_tb->order("event_id ASC");
+        $results = $db->events_attendees_collectors_tb->where("event_id = ? ", $postEventID)->order("user_id ASC");
 
         foreach ($results as $result) {
 
-
-            $result_participate = $db->events_attendees_collectors_tb->where("event_id = ? and attention_status = 1", $result["event_id"])->count("*");
-            $result_register = $db->events_attendees_collectors_tb->where("event_id = ?", $result["event_id"])->count("*");
+            $result_attendee = $db->user_tb->where("user_id = ? ", $result["user_id"])->fetch();
 
             $reports[] = array(
                 "id" => $result["id"],
                 "event_id" => $result["event_id"],
-                "event_name_th" => $result["event_name_th"],
-                "event_name_eng" => $result["event_name_eng"],
-                "event_location" => $result["event_location"],
-                "event_begin_date" => $result["event_begin_date"],
-                "event_end_date" => $result["event_end_date"],
-                "event_active" => $result["event_active"],
-                "created_datetime" => $result["created_datetime"],
-                "modified_datetime" => $result["modified_datetime"],
-                "countParticipate" => $result_participate,
-                "countRegister" => $result_register
+                "user_id" => $result["user_id"],
+                "user_name" => $result_attendee["user_name"],
+                "attention_status" => $result["attention_status"]
                 );
+
+            if ($result["attention_status"] == "1") {
+                $countParticipate++;
+            }
         }
 
         $rowCount = count($results);
-
+        $rowParticipate = $countParticipate;
 
         /* ************************* */
         /* เริ่มกระบวนการส่งค่ากลับ */
         /* ************************* */
         $resultText = "success";
         
-        $reportResult = array("result" =>  $resultText, "count"=>$rowCount, "rows" => $reports);
+        $reportResult = array("result" =>  $resultText, 
+                              "count"=>$rowCount, 
+                              "participate" => $rowParticipate ,
+                              "rows" => $reports, 
+                              "content-type" => $ContetnType, 
+                              "postEventID" => $postEventID);
 
         
         $app->response()->header("Content-Type", "application/json");
         echo json_encode($reportResult);
-    
 
-        // $return_msg = array("msg" => "This is listEvent Service");
+        // $return_msg = array("msg" => "Event ID : ".$postEventID);
         
         // $app->response()->header("Content-Type", "application/json");
         // echo json_encode($return_msg);

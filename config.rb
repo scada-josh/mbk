@@ -141,6 +141,8 @@ configure :build do
   ignore '/helper/bootstrap-wizard/*'
   ignore '/helper/jquery-validation/*'
   ignore '/helper/bootstrap-datepicker-thai/*'
+
+  ignore '/src/app/*'
   
   
 
