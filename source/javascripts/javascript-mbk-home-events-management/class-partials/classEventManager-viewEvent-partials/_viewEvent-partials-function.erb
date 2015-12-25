@@ -1,0 +1,38 @@
+    this.viewEvent_updateTileInformation = function () {
+      //console.log("viewEvent_updateTileInformation");
+
+      console.log("postEventID is : " + this.postEventID);
+
+            $.ajax({
+                url: "../../../../api/eventManager/listAttendeeByEventID/",
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+				  "eventID": this.postEventID
+				}) , 
+                cache: false,
+                async: false,
+                success: function(data) {
+                   console.log(data.count);
+                   console.log(data.participate);
+
+			       $("#viewEvent-titile").text("ทดสอบๆ");
+			       $("#viewEvent-register").text(data.count);
+			       $("#viewEvent-participate").text(data.participate);
+
+                    AttendeeParticipateEventDataTableID.ajax.reload();
+                    jqueryRouteProvider('viewEvent');
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert('init error: ' + textStatus);
+                }
+            });
+
+
+
+
+      
+
+
+    }

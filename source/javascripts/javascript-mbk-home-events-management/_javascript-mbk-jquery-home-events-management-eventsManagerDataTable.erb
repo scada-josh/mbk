@@ -169,18 +169,15 @@ if (jQuery().dataTable) {
 
         // reload attendee datatable
         postEventID = data.event_id;
+        classEventManager.postEventID = data.event_id;
         
         
 
         if ($(this).attr('data-original-title') == 'View') {
             //console.log('View');
-            $('#knobViewEvent').val(27).trigger('change');
+            //$('#knobViewEvent').val(27).trigger('change');
 
-            AttendeeParticipateEventDataTableID.ajax.reload();
-            jqueryRouteProvider('viewEvent');
-
-
-            
+            classEventManager.viewEvent_updateTileInformation();
 
 
         } else if ($(this).attr('data-original-title') == 'Edit') {
