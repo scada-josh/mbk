@@ -1,0 +1,38 @@
+    this.refreshAttendeeParticipateEventDataTable = function () {
+      //console.log("refreshAttendeeParticipateEventDataTable");
+
+      // console.log("postEventID is : " + this.postEventID);
+
+            $.ajax({
+                url: "../../../../api/eventManager/listAttendeeByEventID/",
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+				  "eventID": this.postEventID
+				}) , 
+                cache: false,
+                async: false,
+                success: function(data) {
+                   // console.log(data.count);
+                   // console.log(data.participate);
+
+			       $("#viewEvent-titile").text(data.event_name_th);
+			       $("#viewEvent-register").text(data.count);
+			       $("#viewEvent-participate").text(data.participate);
+
+                    AttendeeParticipateEventDataTableID.ajax.reload();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert('init error: ' + textStatus);
+                }
+            });
+
+
+
+
+      
+
+
+    }

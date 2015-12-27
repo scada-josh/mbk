@@ -1,0 +1,91 @@
+    /**
+     *
+     * @apiName UpdateAttendeeStatus
+     * @apiGroup Event Manager
+     * @apiVersion 0.1.0
+     *
+     * @api {post} /eventManager/updateAttendeeStatus/ Update Attendee Status By EventID & UserID
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่บันทึกสถานะการเข้าร่วมกิจกรรม
+     *
+     *
+     * @apiSampleRequest /eventManager/updateAttendeeStatus/
+     *
+     * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
+     *
+     * @apiSuccessExample Example data on success:
+     * {
+     *   "msg": "Hello, anusorn"
+     * }
+     *
+     * @apiError UserNotFound The <code>id</code> of the User was not found.
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "error": "UserNotFound"
+     *     }
+     *
+     */
+     function updateAttendeeStatus($app, $pdo, $db) {
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการรับค่าพารามิเตอร์จากส่วนของ Payload ซึ่งอยู่ในรูปแบบ JSON */
+        /* ************************* */
+        $headers = $app->request->headers;
+        $ContetnType = $app->request->headers->get('Content-Type');
+
+        /**
+        * apidoc @apiSampleRequest, iOS RESTKit use content-type is "application/json"
+        * Web Form, Advance REST Client App use content-type is "application/x-www-form-urlencoded"
+        */
+        if ($ContetnType == "application/json") {
+
+            $request = $app->request();
+            $result = json_decode($request->getBody());
+
+            /* receive request */
+            $postEventID = $result->event_id;
+            $postUserID = $result->user_id;
+
+
+        } else if ($ContetnType == "application/x-www-form-urlencoded"){
+
+            //$userID = $app->request()->params('userID_param');
+            //$userID = $app->request()->post('userID_param');
+        }
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
+        /* ************************* */
+        $reports = array();
+
+
+        /* insert or update attendee */
+        $insertUpdateEventAttendeeCollector_result = $db->events_attendees_collectors_tb()->insert_update(
+                                                    array("eventID_userID" => $postEventID."_".$postUserID), // unique key
+                                                    array("event_id" => $postEventID,
+                                                          "user_id" => $postUserID,
+                                                          "attention_status" => "1"), // insert values if the row doesn't exist
+                                                    array("attention_status" => "1") // update values otherwise
+                                                );
+        
+
+        
+
+        $resultText = "success";
+        $reportResult = array("result" =>  $resultText, 
+                              "insertUpdateEventAttendeeCollector_result" => $insertUpdateEventAttendeeCollector_result);
+
+        
+        $app->response()->header("Content-Type", "application/json");
+        echo json_encode($reportResult);
+    
+
+        // $return_msg = array("msg" => "This is listEvent Service", "event_id" => $postEventID, "user_id" => $postUserID);
+        
+        // $app->response()->header("Content-Type", "application/json");
+        // echo json_encode($return_msg);
+
+     }
+     

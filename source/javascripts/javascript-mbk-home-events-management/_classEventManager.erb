@@ -5,7 +5,12 @@ var classEventManager = new function() {
 
 
     /* viewEvent-partials-function */
+
+    this.viewEvent_updateTileInformation;
     <%= partial "javascript-mbk-home-events-management/class-partials/classEventManager-viewEvent-partials/_viewEvent-partials-function" %>
+	
+	this.refreshAttendeeParticipateEventDataTable;
+    <%= partial "javascript-mbk-home-events-management/class-partials/classEventManager-viewEvent-partials/_refreshAttendeeParticipateEventDataTable" %>
 
 }
 
