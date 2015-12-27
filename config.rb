@@ -143,6 +143,8 @@ configure :build do
   ignore '/helper/bootstrap-datepicker-thai/*'
 
   ignore '/src/app/*'
+
+  ignore '/src/desktop/Home/EventsManagement/Events/events-views/*'
   
   
 

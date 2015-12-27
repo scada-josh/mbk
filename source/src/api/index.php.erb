@@ -33,6 +33,9 @@ layout: "layout-api"
 	$app->get('/eventManager/listEventForMobile/',function() use ($app, $pdo, $db) { listEventForMobile($app, $pdo, $db); });
     $app->post('/eventManager/listAttendeeByEventID/',function() use ($app, $pdo, $db) { listAttendeeByEventID($app, $pdo, $db); });
 
+    /* User manager */
+    $app->get('/userManager/getUserByID/:user_id',function($user_id) use ($app, $pdo, $db) { getUserByID($user_id, $app, $pdo, $db); });
+
 	$app->run();
 
     /* Test Manager Partial */
@@ -50,5 +53,8 @@ layout: "layout-api"
     <%= partial "/EventManager/_summaryEmployeeByDivision" %>
     <%= partial "/EventManager/_listEventForMobile" %>
     <%= partial "/EventManager/_listAttendeeByEventID" %>
+
+    /* User Manager Partial */
+    <%= partial "/UserManager/_getUserByID" %>
     
 ?>

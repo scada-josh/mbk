@@ -98,6 +98,9 @@
             }
         }
 
+        $result_event = $db->events_tb->where("event_id = ? ", $postEventID)->fetch();
+
+        $event_name_th = $result_event["event_name_th"];
         $rowCount = count($results);
         $rowParticipate = $countParticipate;
 
@@ -107,6 +110,7 @@
         $resultText = "success";
         
         $reportResult = array("result" =>  $resultText, 
+                              "event_name_th" => $event_name_th,
                               "count"=>$rowCount, 
                               "participate" => $rowParticipate ,
                               "rows" => $reports, 

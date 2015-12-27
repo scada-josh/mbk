@@ -1,0 +1,69 @@
+    /**
+     *
+     * @apiName GetUserByID
+     * @apiGroup User Manager
+     * @apiVersion 0.1.0
+     *
+     * @api {get} /userManager/getUserByID/:user_id Get User By ID
+     * @apiDescription คำอธิบาย : ในส่วนนี้จะมีหน้าที่แสดงชื่อและรายละเอียดพนักงาน แยกตามรหัสพนักงาน
+     *
+     *
+     * @apiParam {String} user_id     รหัสพนักงาน
+     *
+     * @apiSampleRequest /userManager/getUserByID/:user_id
+     *
+     * @apiSuccess {String} msg แสดงข้อความทักทายผู้ใช้งาน
+     *
+     * @apiSuccessExample Example data on success:
+     * {
+     *   "msg": "Hello, anusorn"
+     * }
+     *
+     * @apiError UserNotFound The <code>id</code> of the User was not found.
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "error": "UserNotFound"
+     *     }
+     *
+     */
+
+    function getUserByID($user_id, $app, $pdo, $db) {
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการเชื่อมต่อกับฐานข้อมูล MySQL */
+        /* ************************* */
+        $reports = array();
+
+
+            $result_user= $db->user_tb->where("user_id = ?", $user_id)->fetch();
+
+            $reports[] = array(
+                "user_id" => $result_user["user_id"],
+                "user_name" => $result_user["user_name"],
+                "user_position" => $result_user["user_position"],
+                "user_division" => $result_user["user_division"],
+                "user_org" => $result_user["user_org"]
+            );
+
+
+        /* ************************* */
+        /* เริ่มกระบวนการส่งค่ากลับ */
+        /* ************************* */
+        $resultText = "success";
+        
+        //$reportResult = array("result" =>  $resultText, "user_info" => $reports);
+        $reportResult = $reports;
+
+        
+        $app->response()->header("Content-Type", "application/json");
+        echo json_encode($reportResult);
+
+
+        // //echo "สวัสดี, $name";
+        // $return_m = array("msg" => "สวัสดี, $user_id");
+
+        // $app->response()->header("Content-Type", "application/json");
+        // echo json_encode($return_m);
+    };
